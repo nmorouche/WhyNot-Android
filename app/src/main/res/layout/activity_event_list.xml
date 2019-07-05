@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventList">
+    tools:context=".views.EventList">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/event_rcv"

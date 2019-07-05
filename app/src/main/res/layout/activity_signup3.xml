@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Signup3Activity"
+    tools:context=".views.Signup3Activity"
     android:orientation="vertical">
     <TextView
         android:id="@+id/signup3GenderButton"

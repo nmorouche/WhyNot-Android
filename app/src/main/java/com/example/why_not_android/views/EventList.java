@@ -1,15 +1,12 @@
-package com.example.why_not_android;
+package com.example.why_not_android.views;
 
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.Toast;
 
-import java.util.List;
+import com.example.why_not_android.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +16,7 @@ public class EventList extends AppCompatActivity {
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
     @BindView(R.id.event_rcv)
-    RecyclerView eventRcv ;
+    RecyclerView eventRcv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,20 +28,20 @@ public class EventList extends AppCompatActivity {
     }
 
 
-    private void initRcv(){
+    private void initRcv() {
         //todo faire l'init
     }
 
-    private void loadData(){
+    private void loadData() {
         //todo faire le load avec connexion api
 
     }
 
-    private void configureBottomView(){
+    private void configureBottomView() {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateMainFragment(item.getItemId()));
     }
 
-    private Boolean updateMainFragment(Integer integer){
+    private Boolean updateMainFragment(Integer integer) {
         switch (integer) {
             case R.id.action_profil:
                 Intent intent = new Intent(EventList.this, LoginActivity.class);
@@ -58,4 +55,4 @@ public class EventList extends AppCompatActivity {
         }
         return true;
     }
-    }
+}

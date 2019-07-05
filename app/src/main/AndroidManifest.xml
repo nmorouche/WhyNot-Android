@@ -2,22 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.why_not_android">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EventList"></activity>
-        <activity android:name=".Home" />
-        <activity android:name=".Signup3Activity" />
-        <activity android:name=".Signup2Activity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".views.EventList"></activity>
+        <activity android:name=".views.Home" />
+        <activity android:name=".views.Signup3Activity" />
+        <activity android:name=".views.Signup2Activity" />
+        <activity android:name=".views.SignupActivity" />
+        <activity android:name=".views.LoginActivity" />
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
