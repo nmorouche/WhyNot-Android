@@ -1,10 +1,11 @@
-package com.example.why_not_android.data.service;
+package com.example.why_not_android.data.service.providers;
 
 import android.util.Log;
 
 import com.example.why_not_android.data.dto.EventDTO;
 import com.example.why_not_android.data.dto.mapper.EventMapper;
 import com.example.why_not_android.data.model.Event;
+import com.example.why_not_android.data.service.EventService;
 
 import java.util.List;
 

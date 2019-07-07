@@ -1,4 +1,4 @@
-package com.example.why_not_android.adapter;
+package com.example.why_not_android.data.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.why_not_android.MyGlideApp;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.model.Event;
 

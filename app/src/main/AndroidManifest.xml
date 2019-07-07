@@ -3,6 +3,9 @@
     package="com.example.why_not_android">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EventList"></activity>
+        <activity android:name=".DetailEvent"></activity>
+        <activity android:name=".EventList" />
         <activity android:name=".Home" />
         <activity android:name=".Signup3Activity" />
         <activity android:name=".Signup2Activity" />
