@@ -1,17 +1,21 @@
 package com.example.why_not_android.data.service.providers;
 
+
 import android.util.Log;
 
 import com.example.why_not_android.data.dto.EventDTO;
+import com.example.why_not_android.data.dto.EventsDTO;
 import com.example.why_not_android.data.dto.mapper.EventMapper;
 import com.example.why_not_android.data.model.Event;
 import com.example.why_not_android.data.service.EventService;
 
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -27,7 +31,7 @@ public class NetworkProvider {
     }
 
     private NetworkProvider() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://demo2421622.mockable.io/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -35,15 +39,23 @@ public class NetworkProvider {
     }
 
     public void getEvents(Listener<List<Event>> listener) {
-        eventService.getEvents().enqueue(new Callback<List<EventDTO>>() {
-            @Override public void onResponse(Call<List<EventDTO>> call, Response<List<EventDTO>> response) {
-                List<EventDTO> eventDTOList = response.body();
-                List<Event> eventList = EventMapper.map(eventDTOList);
+        eventService.getEvents().enqueue(new Callback<EventsDTO>() {
+            @Override
+            public String toString() {
+                return "$classname{}";
+            }
+
+            @Override public void onResponse(Call<EventsDTO> call, Response<EventsDTO> response) {
+
+                EventsDTO eventsDTOList = response.body();
+                List<EventDTO> event = eventsDTOList.getEventDTOArrayList();
+                Log.d("test", event.get(0).toString());
+                List<Event> eventList = EventMapper.map(event);
                 Log.d("suc","success");
                 listener.onSuccess(eventList);
             }
 
-            @Override public void onFailure(Call<List<EventDTO>> call, Throwable t) {
+            @Override public void onFailure(Call<EventsDTO> call, Throwable t) {
                 listener.onError(t);
                 Log.d("toz","fail");
             }
@@ -54,5 +66,18 @@ public class NetworkProvider {
         void onSuccess(T data);
 
         void onError(Throwable t);
+    }
+
+
+    private static Retrofit retrofit = null;
+
+    public static Retrofit getClient() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("http://10.0.2.2:3000/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
     }
 }

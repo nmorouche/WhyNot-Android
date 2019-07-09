@@ -2,11 +2,20 @@ package com.example.why_not_android.data.model;
 
 public class Event {
     private String  name;
+    private String  _id;
     private String  description;
     private String  address;
     private String date;
     private String  imageURL;
     private int  price;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getName() {
         return name;

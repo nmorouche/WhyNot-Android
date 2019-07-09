@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Signup2Activity"
+    tools:context=".views.Signup2Activity"
     android:orientation="vertical">
 
     <ImageView
@@ -25,7 +25,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:text="@string/photo"
-        app:layout_constraintBottom_toTopOf="@id/photoImgView"
         />
 
     <TextView
@@ -37,7 +36,6 @@
         android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="@string/date_de_naissance"
-        app:layout_constraintBottom_toTopOf="@id/photoButton"
         />
 
     <EditText
@@ -49,7 +47,6 @@
         android:layout_marginTop="20dp"
         android:clickable="true"
         android:focusable="false"
-        app:layout_constraintBottom_toTopOf="@id/signup2BirthdateLabel"
         />
     <TextView
         android:id="@+id/signup2GenderLabel"
@@ -60,7 +57,6 @@
         android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="@string/sexe"
-        app:layout_constraintBottom_toTopOf="@id/signup2Birthdate"
         />
 
     <RadioGroup
@@ -71,7 +67,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/signup2GenderLabel"
 
         >
         <RadioButton
@@ -94,7 +89,15 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/suivant"
-        android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toTopOf="@id/signup2radioGroup"/>
+        android:layout_marginRight="20dp"/>
+
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="UPLOAD"
+        android:layout_marginRight="20dp"/>
 
 </LinearLayout>

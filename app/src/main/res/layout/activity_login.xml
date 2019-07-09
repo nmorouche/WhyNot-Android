@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".views.LoginActivity"
     android:orientation="vertical">
 
 
@@ -19,16 +19,23 @@
         android:layout_marginRight="20dp"
         />
 
-    <EditText
-        android:id="@+id/loginMailEdit"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content">
 
-        app:layout_constraintBottom_toTopOf="@id/loginMailLabel"
-        />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/loginMailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="text"
+            android:hint="Email"
+            app:layout_constraintBottom_toTopOf="@id/loginMailLabel"
+            />
+
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/loginPasswordLabel"
@@ -42,16 +49,23 @@
         app:layout_constraintBottom_toTopOf="@id/loginMailEdit"
         />
 
-    <EditText
-        android:id="@+id/loginPasswordEdit"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content">
 
-        app:layout_constraintBottom_toTopOf="@id/loginPasswordEdit"
-        />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/loginPasswordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textPassword"
+            android:hint="Mot de passe"
+            app:layout_constraintBottom_toTopOf="@id/loginPasswordEdit"
+            />
+    </android.support.design.widget.TextInputLayout>
+
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"

@@ -3,13 +3,21 @@ package com.example.why_not_android.data.dto;
 import com.google.gson.annotations.SerializedName;
 
 public class EventDTO {
-
+    @SerializedName("_id") private String  _id;
     @SerializedName("name") private String  name;
     @SerializedName("description") private String  description;
     @SerializedName("address") private String  address;
     @SerializedName("date") private String date;
     @SerializedName("imageURL") private String  imageURL;
     @SerializedName("price") private int  price;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getName() {
         return name;

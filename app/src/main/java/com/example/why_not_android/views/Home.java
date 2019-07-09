@@ -1,9 +1,19 @@
-package com.example.why_not_android;
+package com.example.why_not_android.views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.example.why_not_android.R;
+//import com.example.why_not_android.data.Models.Signup;
+import com.example.why_not_android.data.SharedPreferences.SharedPref;
+import com.example.why_not_android.data.dto.UserDTO;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -12,6 +22,7 @@ public class Home extends AppCompatActivity {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -20,14 +31,20 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         this.configureBottomView();
+        sharedPreferences = SharedPref.getInstance(this);
+
+        testSingleton();
+    }
+
+    void testSingleton() {
 
     }
 
-    private void configureBottomView(){
+    private void configureBottomView() {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateMainFragment(item.getItemId()));
     }
 
-    private Boolean updateMainFragment(Integer integer){
+    private Boolean updateMainFragment(Integer integer) {
         switch (integer) {
             case R.id.action_profil:
                 Intent intent = new Intent(Home.this, LoginActivity.class);
