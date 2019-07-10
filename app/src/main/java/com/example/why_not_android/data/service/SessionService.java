@@ -35,5 +35,5 @@ public interface SessionService {
             @Part("bio") RequestBody bio,
             @Part("preference") RequestBody preference,
             @Part MultipartBody.Part file
-    );
+    );*/
 }

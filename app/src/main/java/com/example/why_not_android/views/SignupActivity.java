@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.why_not_android.R;
-import com.example.why_not_android.data.Models.Signup;
+//import com.example.why_not_android.data.Models.Signup;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,9 +41,9 @@ public class SignupActivity extends AppCompatActivity {
         } else if (passwordEdit.getText().toString().length() < 5) {
             Toast.makeText(this, "Password trop court", Toast.LENGTH_SHORT).show();
         } else {
-            Signup.getClient().setEmail(mailEdit.getText().toString());
-            Signup.getClient().setUsername(usernameEdit.getText().toString());
-            Signup.getClient().setPassword(passwordEdit.getText().toString());
+            //Signup.getClient().setEmail(mailEdit.getText().toString());
+            //Signup.getClient().setUsername(usernameEdit.getText().toString());
+            //Signup.getClient().setPassword(passwordEdit.getText().toString());
             Intent intent = new Intent(SignupActivity.this, Signup2Activity.class);
             startActivity(intent);
         }

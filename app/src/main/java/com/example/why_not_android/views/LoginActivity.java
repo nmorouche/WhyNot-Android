@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     String userJSON = gson.toJson(sessionDTO.getUserDTO());
+
                     sharedPreferences.edit()
                             .putString("token", sessionDTO.getToken())
                             .putString("user", userJSON)
