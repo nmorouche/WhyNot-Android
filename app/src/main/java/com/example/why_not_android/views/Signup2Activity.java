@@ -18,9 +18,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.why_not_android.R;
-import com.example.why_not_android.data.Models.Signup;
+//import com.example.why_not_android.data.Models.Signup;
 import com.example.why_not_android.data.Permissions;
-import com.example.why_not_android.data.dto.ImageDTO;
+//import com.example.why_not_android.data.dto.ImageDTO;
 import com.example.why_not_android.data.service.SessionService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
 
@@ -93,8 +93,8 @@ public class Signup2Activity extends AppCompatActivity {
         } else if (gender.length() == 0) {
             Toast.makeText(this, "Selectionner un genre", Toast.LENGTH_SHORT).show();
         } else {
-            Signup.getClient().setGender(gender);
-            Signup.getClient().setBirthdate(birthdateEdt.getText().toString());
+           // Signup.getClient().setGender(gender);
+            //Signup.getClient().setBirthdate(birthdateEdt.getText().toString());
             //Signup.getClient().setImage(image);
             Intent intent = new Intent(this, Signup3Activity.class);
             startActivity(intent);

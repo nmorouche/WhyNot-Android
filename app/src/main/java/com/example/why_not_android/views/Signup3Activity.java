@@ -10,7 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.why_not_android.R;
-import com.example.why_not_android.data.Models.Signup;
+//import com.example.why_not_android.data.Models.Signup;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class Signup3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup3);
         ButterKnife.bind(this);
-        Log.d("toz", Signup.getClient().toString());
+        //Log.d("toz", Signup.getClient().toString());
         prefRadio.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.signup3radioButtonHomme) {
                 preferences = "homme";
@@ -50,10 +50,10 @@ public class Signup3Activity extends AppCompatActivity {
         } else if (bioEdit.getText().toString().length() == 0) {
             Toast.makeText(this, "Merci d'entrer une bio", Toast.LENGTH_SHORT).show();
         } else {
-            Signup.getClient().setBio(bioEdit.getText().toString());
-            Signup.getClient().setPreferences(preferences);
-            Log.d("toz", Signup.getClient().getPreferences());
-            Log.d("toz", Signup.getClient().toString());
+           // Signup.getClient().setBio(bioEdit.getText().toString());
+           // Signup.getClient().setPreferences(preferences);
+           // Log.d("toz", Signup.getClient().getPreferences());
+            //Log.d("toz", Signup.getClient().toString());
             Intent intent = new Intent(Signup3Activity.this, Home.class);
             startActivity(intent);
         }

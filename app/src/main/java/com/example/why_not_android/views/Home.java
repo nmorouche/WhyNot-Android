@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.why_not_android.R;
-import com.example.why_not_android.data.Models.Signup;
+//import com.example.why_not_android.data.Models.Signup;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.dto.UserDTO;
 import com.google.gson.Gson;
@@ -31,11 +31,13 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         this.configureBottomView();
+        sharedPreferences = SharedPref.getInstance(this);
+
         testSingleton();
     }
 
     void testSingleton() {
-        Log.d("toz4", Signup.getClient().toString());
+
     }
 
     private void configureBottomView() {

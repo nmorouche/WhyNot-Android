@@ -1,6 +1,6 @@
 package com.example.why_not_android.data.service;
 
-import com.example.why_not_android.data.dto.ImageDTO;
+//import com.example.why_not_android.data.dto.ImageDTO;
 import com.example.why_not_android.data.dto.LoginDTO;
 import com.example.why_not_android.data.dto.SessionDTO;
 
@@ -17,10 +17,10 @@ public interface SessionService {
     @POST("users/login")
     Call<SessionDTO> login(@Body LoginDTO loginDTO);
 
-    @Multipart
+    /*@Multipart
     @PUT("test/single")
     Call<ImageDTO> uploadImage(
             @Part("description") RequestBody description,
             @Part MultipartBody.Part file
-    );
+    );*/
 }
