@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.Signup2Activity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".views.Signup2Activity">
 
     <ImageView
         android:id="@+id/photoImgView"
-        android:maxHeight="250dp"
-        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="0dp"
         android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:adjustViewBounds="true"
+        android:maxHeight="250dp" />
 
     <Button
         android:id="@+id/photoButton"
@@ -24,8 +24,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:text="@string/photo"
-        />
+        android:text="@string/photo" />
 
     <TextView
         android:id="@+id/signup2BirthdateLabel"
@@ -35,19 +34,17 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="@string/date_de_naissance"
-        />
+        android:text="@string/date_de_naissance" />
 
     <EditText
         android:id="@+id/signup2Birthdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:focusable="false"
-        />
+        android:layout_marginEnd="20dp"
+        android:focusable="false" />
+
     <TextView
         android:id="@+id/signup2GenderLabel"
         android:layout_width="match_parent"
@@ -56,48 +53,38 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="@string/sexe"
-        />
+        android:text="@string/sexe" />
 
     <RadioGroup
         android:id="@+id/signup2radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
-        >
         <RadioButton
             android:id="@+id/radioButtonHomme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/homme"
-            />
+            android:text="@string/homme" />
+
         <RadioButton
             android:id="@+id/radioButtonFemme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/femme"
-            />
+            android:text="@string/femme" />
     </RadioGroup>
+
     <Button
         android:id="@+id/signup2Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/suivant"
-        android:layout_marginRight="20dp"/>
-
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:text="UPLOAD"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginRight="20dp"
+        android:text="@string/suivant" />
 
 </LinearLayout>

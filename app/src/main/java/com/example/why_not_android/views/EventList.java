@@ -34,7 +34,6 @@ public class EventList extends AppCompatActivity {
 
     private void loadData() {
         //todo faire le load avec connexion api
-
     }
 
     private void configureBottomView() {

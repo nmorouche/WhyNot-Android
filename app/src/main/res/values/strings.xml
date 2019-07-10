@@ -16,4 +16,6 @@
     <string name="les_deux">Les deux</string>
     <string name="pr_ference">Préference</string>
     <string name="biographie">Biographie</string>
+    <string name="LoginActivity_password_hint">Mot de passe</string>
+    <string name="LoginActivity_email_hint">Email</string>
 </resources>

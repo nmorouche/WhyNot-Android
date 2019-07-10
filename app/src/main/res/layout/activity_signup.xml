@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.SignupActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".views.SignupActivity">
 
 
     <TextView
@@ -25,9 +25,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-
-        app:layout_constraintBottom_toTopOf="@id/signupMailLabel"
-        />
+        android:text="nassim@hotmail.fr"
+        app:layout_constraintBottom_toTopOf="@id/signupMailLabel" />
 
     <TextView
         android:id="@+id/signupUsernameLabel"
@@ -38,8 +37,7 @@
         android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="@string/nom_d_utilisateur"
-        app:layout_constraintBottom_toTopOf="@id/signupMailEdit"
-        />
+        app:layout_constraintBottom_toTopOf="@id/signupMailEdit" />
 
     <EditText
         android:id="@+id/signupUsernameEdit"
@@ -48,21 +46,19 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-
-        app:layout_constraintBottom_toTopOf="@id/signupUsernameLabel"
-        />
+        android:text="nassim"
+        app:layout_constraintBottom_toTopOf="@id/signupUsernameLabel" />
 
     <TextView
         android:id="@+id/signupPasswordLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/mot_de_passe"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toTopOf="@id/signupUsernameEdit"
-        />
+        android:gravity="center"
+        android:text="@string/mot_de_passe"
+        app:layout_constraintBottom_toTopOf="@id/signupUsernameEdit" />
 
     <EditText
         android:id="@+id/signupPasswordEdit"
@@ -71,17 +67,18 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
+        android:inputType="textPassword"
+        android:text="nassim"
+        app:layout_constraintBottom_toTopOf="@id/signupPasswordEdit" />
 
-        app:layout_constraintBottom_toTopOf="@id/signupPasswordEdit"
-        />
     <Button
         android:id="@+id/signupButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/suivant"
         android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toTopOf="@id/signupPasswordEdit"/>
+        android:text="@string/suivant"
+        app:layout_constraintBottom_toTopOf="@id/signupPasswordEdit" />
 
 </LinearLayout>

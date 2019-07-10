@@ -16,7 +16,7 @@ public class UserDTO {
     @SerializedName("sexe")
     private String sexe;
     @SerializedName("preference")
-    private String preference;
+    private int preference;
     @SerializedName("bio")
     private String bio;
     @SerializedName("createdAt")
@@ -74,11 +74,11 @@ public class UserDTO {
         this.sexe = sexe;
     }
 
-    public String getPreference() {
+    public int getPreference() {
         return preference;
     }
 
-    public void setPreference(String preference) {
+    public void setPreference(int preference) {
         this.preference = preference;
     }
 

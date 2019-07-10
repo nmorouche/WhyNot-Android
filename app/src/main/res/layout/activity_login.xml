@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.LoginActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".views.LoginActivity">
 
 
     <TextView
         android:id="@+id/loginMailLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/adresse_mail"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="250dp"
         android:layout_marginRight="20dp"
-        />
+        android:gravity="center"
+        android:text="@string/adresse_mail" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -30,10 +29,10 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
+            android:hint="@string/LoginActivity_email_hint"
             android:inputType="text"
-            android:hint="Email"
-            app:layout_constraintBottom_toTopOf="@id/loginMailLabel"
-            />
+            android:text="nassim@hotmail.fr"
+            app:layout_constraintBottom_toTopOf="@id/loginMailLabel" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -41,13 +40,12 @@
         android:id="@+id/loginPasswordLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/mot_de_passe"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toTopOf="@id/loginMailEdit"
-        />
+        android:gravity="center"
+        android:text="@string/mot_de_passe"
+        app:layout_constraintBottom_toTopOf="@id/loginMailEdit" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -60,10 +58,10 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
+            android:hint="@string/LoginActivity_password_hint"
             android:inputType="textPassword"
-            android:hint="Mot de passe"
-            app:layout_constraintBottom_toTopOf="@id/loginPasswordEdit"
-            />
+            android:text="nassim"
+            app:layout_constraintBottom_toTopOf="@id/loginPasswordEdit" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -72,8 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/valider"
         android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toTopOf="@id/loginPasswordEdit"/>
+        android:text="@string/valider"
+        app:layout_constraintBottom_toTopOf="@id/loginPasswordEdit" />
 
 </LinearLayout>
