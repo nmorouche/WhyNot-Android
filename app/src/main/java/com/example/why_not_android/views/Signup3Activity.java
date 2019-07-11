@@ -75,7 +75,7 @@ public class Signup3Activity extends AppCompatActivity {
 
         // add another part within the multipart request
         RequestBody email =
-                RequestBody.create(
+                 RequestBody.create(
                         okhttp3.MultipartBody.FORM, Signup.getClient().getEmail());
         RequestBody username =
                 RequestBody.create(

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.why_not_android.DetailEvent;
+import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.adapter.EventAdapter;
 import com.example.why_not_android.data.model.Event;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
@@ -41,25 +42,23 @@ public class EventList extends AppCompatActivity {
     }
 
 
-
-    private void initRcv(){
-        Log.d("init","init");
-        eventRcv.setLayoutManager( new LinearLayoutManager(this));
+    private void initRcv() {
+        Log.d("init", "init");
+        eventRcv.setLayoutManager(new LinearLayoutManager(this));
         eventAdapter = new EventAdapter();
         eventRcv.setAdapter(eventAdapter);
         eventAdapter.setItemClickListener(new EventAdapter.ItemClickListener() {
             @Override
             public void onclick(Event event) {
                 //todo
-
                 Intent intent = new Intent(EventList.this, DetailEvent.class);
-                intent.putExtra("eventName",event.getName());
-                intent.putExtra("eventPic",event.getImageURL());
-                intent.putExtra("eventAddress",event.getAddress());
-                intent.putExtra("eventPrice",event.getPrice());
-                intent.putExtra("eventDesc",event.getDescription());
-                intent.putExtra("eventDate",event.getDate());
-                intent.putExtra("eventid",event.get_id());
+                intent.putExtra("eventName", event.getName());
+                intent.putExtra("eventPic", event.getImageURL());
+                intent.putExtra("eventAddress", event.getAddress());
+                intent.putExtra("eventPrice", event.getPrice());
+                intent.putExtra("eventDesc", event.getDescription());
+                intent.putExtra("eventDate", event.getDate());
+                intent.putExtra("eventid", event.get_id());
                 startActivity(intent);
 
             }

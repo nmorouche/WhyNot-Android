@@ -46,6 +46,7 @@ public class DetailEvent extends AppCompatActivity {
     TextView dateTv;
     String eventId;
     private SharedPreferences sharedPreferences;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,19 +71,17 @@ public class DetailEvent extends AppCompatActivity {
         dateTv.setText(date);
 
 
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar,menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_register:
                 Gson gson = new Gson();
                 String json = sharedPreferences.getString("user", "");
@@ -90,8 +89,8 @@ public class DetailEvent extends AppCompatActivity {
                 String userId = user.get_id();
                 EventService eventService;
                 eventService = NetworkProvider.getClient().create(EventService.class);
-                RegisterDTO registerDTO = new RegisterDTO(eventId,userId);
-                Call<RegisterDTO> sessionDTOCall = eventService.register(registerDTO);
+                RegisterDTO registerDTO = new RegisterDTO(eventId, userId);
+                Call<RegisterDTO> sessionDTOCall = eventService.register(SharedPref.getToken(), registerDTO);
                 sessionDTOCall.enqueue(new Callback<RegisterDTO>() {
                     @Override
                     public void onResponse(Call<RegisterDTO> call, Response<RegisterDTO> response) {
@@ -115,8 +114,8 @@ public class DetailEvent extends AppCompatActivity {
                         Log.d("toz", t.toString());
                     }
                 });
-                Log.d("toz",userId);
-                Log.d("manger",user.get_id());
+                Log.d("toz", userId);
+                Log.d("manger", user.get_id());
                 return true;
         }
         return super.onOptionsItemSelected(item);

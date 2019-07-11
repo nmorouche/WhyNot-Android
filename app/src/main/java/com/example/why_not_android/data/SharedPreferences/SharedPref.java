@@ -14,4 +14,8 @@ public class SharedPref {
         }
         return instance;
     }
+
+    public static String getToken() {
+        return instance.getString("token", "");
+    }
 }
