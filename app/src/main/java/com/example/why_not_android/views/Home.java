@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.why_not_android.DetailEvent;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.dto.UserDTO;
@@ -47,6 +48,8 @@ public class Home extends AppCompatActivity {
     Button likeButton;
     @BindView(R.id.activity_home_dislike_button)
     Button dislikeButton;
+    @BindView(R.id.testbutton)
+    Button test;
 
 
     @Override
@@ -105,6 +108,17 @@ public class Home extends AppCompatActivity {
     void dislike() {
         cleanUserList();
     }
+    @OnClick(R.id.testbutton)
+    void detail(){
+        Log.d("wesh","c'est quoi ca ");
+        Intent intent = new Intent(Home.this, Report.class);
+        //intent.putExtra("userName", userDTOList.get(0).getUsername());
+        //intent.putExtra("userBio", userDTOList.get(0).getBio());
+        //intent.putExtra("userBirth",userDTOList.get(0).getBirthdate());
+        //intent.putExtra("userPic", userDTOList.get(0).getPhoto());
+        intent.putExtra("userid", /*userDTOList.get(0).get_id()*/"id");
+        startActivity(intent);
+    }
 
     private void cleanUserList() {
         userDTOList.remove(0);
@@ -130,7 +144,7 @@ public class Home extends AppCompatActivity {
     private Boolean updateMainFragment(Integer integer) {
         switch (integer) {
             case R.id.action_profil:
-                Intent intent = new Intent(Home.this, LoginActivity.class);
+                Intent intent = new Intent(Home.this, Home.class);
                 startActivity(intent);
                 break;
             case R.id.action_events:
