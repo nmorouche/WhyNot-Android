@@ -140,7 +140,14 @@ public class Home extends AppCompatActivity {
             @Override
             public void onResponse(Call<MatchDTO> call, Response<MatchDTO> response) {
                 if (response.isSuccessful()) {
-                    Log.d("CA MARCHE", response.body().toString());
+                    MatchDTO matchDTO = response.body();
+                    if(matchDTO.getMatch() == true) {
+                        Toast.makeText(Home.this, "UN MATCH BRAVO !", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Home.this, "Good luck ;)", Toast.LENGTH_SHORT).show();
+                        setViewed(id);
+                    }
+                    
                 } else {
                     Log.d("CA MARCHE", "CA MARCHE PAS :(");
                 }
