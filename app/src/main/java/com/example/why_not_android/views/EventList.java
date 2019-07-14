@@ -9,9 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.why_not_android.DetailEvent;
-import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.adapter.EventAdapter;
-import com.example.why_not_android.data.model.Event;
+import com.example.why_not_android.data.Models.Event;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
 
 
@@ -60,7 +59,6 @@ public class EventList extends AppCompatActivity {
                 intent.putExtra("eventDate", event.getDate());
                 intent.putExtra("eventid", event.get_id());
                 startActivity(intent);
-
             }
         });
     }
@@ -84,16 +82,12 @@ public class EventList extends AppCompatActivity {
     }
 
     private Boolean updateMainFragment(Integer integer) {
-        switch (integer) {
-            case R.id.action_profil:
-                Intent intent = new Intent(EventList.this, LoginActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.action_events:
-                Intent intent2 = new Intent(EventList.this, EventList.class);
-                startActivity(intent2);
-                break;
-
+        if (integer == R.id.action_profil) {
+            Intent intent = new Intent(EventList.this, Home.class);
+            startActivity(intent);
+        } else if (integer == R.id.action_events) {
+            Intent intent2 = new Intent(EventList.this, EventList.class);
+            startActivity(intent2);
         }
         return true;
     }

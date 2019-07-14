@@ -17,6 +17,7 @@ import com.example.why_not_android.data.MyPermissions;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.dto.SessionDTO;
 import com.example.why_not_android.data.service.SessionService;
+import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
 import com.google.gson.Gson;
 
@@ -85,7 +86,7 @@ public class Signup3Activity extends AppCompatActivity {
                         okhttp3.MultipartBody.FORM, Signup.getClient().getPassword());
         RequestBody gender =
                 RequestBody.create(
-                        okhttp3.MultipartBody.FORM, Signup.getClient().getGender());
+                        okhttp3.MultipartBody.FORM, String.valueOf(Signup.getClient().getGender()));
         RequestBody birthdate =
                 RequestBody.create(
                         okhttp3.MultipartBody.FORM, Signup.getClient().getBirthdate());

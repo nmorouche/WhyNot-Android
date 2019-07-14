@@ -1,19 +1,14 @@
 package com.example.why_not_android.data.service.providers;
 
 
-import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.dto.EventDTO;
 import com.example.why_not_android.data.dto.EventsDTO;
 import com.example.why_not_android.data.dto.mapper.EventMapper;
-import com.example.why_not_android.data.model.Event;
+import com.example.why_not_android.data.Models.Event;
 import com.example.why_not_android.data.service.EventService;
-import com.example.why_not_android.views.EventList;
-import com.example.why_not_android.views.Home;
-import com.example.why_not_android.views.LoginActivity;
 
 import java.util.List;
 
@@ -51,9 +46,7 @@ public class NetworkProvider {
                 if (response.isSuccessful()) {
                     EventsDTO eventsDTOList = response.body();
                     List<EventDTO> event = eventsDTOList.getEventDTOArrayList();
-                    Log.d("test", event.get(0).toString());
                     List<Event> eventList = EventMapper.map(event);
-                    Log.d("suc", "success");
                     listener.onSuccess(eventList);
                 }
             }

@@ -46,6 +46,12 @@
         app:layout_constraintStart_toEndOf="@+id/activity_home_dislike_button"
         app:layout_constraintTop_toBottomOf="@+id/activity_home_user_description_tv" />
 
+    <TextView
+        android:id="@+id/activity_home_empty_tv"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

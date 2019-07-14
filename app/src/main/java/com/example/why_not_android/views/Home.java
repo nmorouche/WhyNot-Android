@@ -15,15 +15,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
+import com.example.why_not_android.data.dto.MatchDTO;
+import com.example.why_not_android.data.dto.RegisterResultDTO;
 import com.example.why_not_android.data.dto.UserDTO;
-import com.example.why_not_android.data.dto.UsersListDTO;
-import com.example.why_not_android.data.service.SessionService;
+import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -37,8 +34,6 @@ public class Home extends AppCompatActivity {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
-    private SharedPreferences sharedPreferences;
-    private ArrayList<UserDTO> userDTOList;
     @BindView(R.id.activity_home_iv)
     ImageView imageView;
     @BindView(R.id.activity_home_user_description_tv)
@@ -47,6 +42,10 @@ public class Home extends AppCompatActivity {
     Button likeButton;
     @BindView(R.id.activity_home_dislike_button)
     Button dislikeButton;
+    @BindView(R.id.activity_home_empty_tv)
+    TextView emptyTextView;
+    private SharedPreferences sharedPreferences;
+    private ArrayList<UserDTO> userDTOList;
 
 
     @Override
@@ -60,23 +59,39 @@ public class Home extends AppCompatActivity {
         getUsers();
     }
 
+    @OnClick(R.id.activity_home_like_button)
+    void like() {
+        setLiked(userDTOList.get(0).get_id());
+        cleanUserList();
+    }
+
+    @OnClick(R.id.activity_home_dislike_button)
+    void dislike() {
+        setViewed(userDTOList.get(0).get_id());
+        cleanUserList();
+    }
+
     void getUsers() {
-        SessionService sessionService;
-        sessionService = NetworkProvider.getClient().create(SessionService.class);
+        UserService userService;
+        userService = NetworkProvider.getClient().create(UserService.class);
         String token = sharedPreferences.getString("token", "");
 
-        Call<ArrayList<UserDTO>> userDTOCall = sessionService.getUsers(token);
+        Call<ArrayList<UserDTO>> userDTOCall = userService.getUsers(token);
         userDTOCall.enqueue(new Callback<ArrayList<UserDTO>>() {
             @Override
             public void onResponse(Call<ArrayList<UserDTO>> call, Response<ArrayList<UserDTO>> response) {
                 if (response.isSuccessful()) {
-                    userDTOList = response.body();
-                    UserDTO userDTO = userDTOList.get(0);
-                    textView.setText(userDTO.getUsername() + "\n" + userDTO.getPreference());
-                    String url = userDTO.getPhoto();
-                    url = url.replace("localhost", "10.0.2.2");
-                    Glide.with(Home.this).load(url).into(imageView);
-                    displayButtons();
+                    if (response.body().size() != 0) {
+                        userDTOList = response.body();
+                        UserDTO userDTO = userDTOList.get(0);
+                        textView.setText(userDTO.getUsername() + "\n" + userDTO.getPreference());
+                        String url = userDTO.getPhoto();
+                        url = url.replace("localhost", "10.0.2.2");
+                        Glide.with(Home.this).load(url).into(imageView);
+                        displayButtons();
+                    } else {
+                        emptyUserList();
+                    }
                 } else {
                     try {
                         //Return to MainActivity if the user is no longer connected.
@@ -96,26 +111,72 @@ public class Home extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.activity_home_like_button)
-    void like() {
-        cleanUserList();
+    void setViewed(String id) {
+        UserService userService;
+        userService = NetworkProvider.getClient().create(UserService.class);
+        String token = sharedPreferences.getString("token", "");
+
+        Call<RegisterResultDTO> registerResultDTOCall = userService.setViewed(token, id);
+        registerResultDTOCall.enqueue(new Callback<RegisterResultDTO>() {
+            @Override
+            public void onResponse(Call<RegisterResultDTO> call, Response<RegisterResultDTO> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResultDTO> call, Throwable t) {
+                Toast.makeText(Home.this, "CA MARCHE PAS :(", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @OnClick(R.id.activity_home_dislike_button)
-    void dislike() {
-        cleanUserList();
+    void setLiked(String id) {
+        UserService userService;
+        userService = NetworkProvider.getClient().create(UserService.class);
+        String token = sharedPreferences.getString("token", "");
+
+        Call<MatchDTO> matchDTOCall = userService.like(token, id);
+        matchDTOCall.enqueue(new Callback<MatchDTO>() {
+            @Override
+            public void onResponse(Call<MatchDTO> call, Response<MatchDTO> response) {
+                if (response.isSuccessful()) {
+                    Log.d("CA MARCHE", response.body().toString());
+                } else {
+                    Log.d("CA MARCHE", "CA MARCHE PAS :(");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MatchDTO> call, Throwable t) {
+                Log.d("CA MARCHE", "CA FAIL :(");
+            }
+        });
+    }
+
+    private void emptyUserList() {
+        imageView.setVisibility(View.INVISIBLE);
+        textView.setVisibility(View.INVISIBLE);
+        likeButton.setVisibility(View.INVISIBLE);
+        dislikeButton.setVisibility(View.INVISIBLE);
+        emptyTextView.setText("YA R MA GUEULE");
+        emptyTextView.setVisibility(View.VISIBLE);
     }
 
     private void cleanUserList() {
-        userDTOList.remove(0);
-        UserDTO userDTO = userDTOList.get(0);
-        textView.setText(userDTO.getUsername() + "\n" + userDTO.getPreference());
-        Glide.with(Home.this).load(userDTO.getPhoto().replace("localhost", "10.0.2.2")).into(imageView);
+        if (userDTOList.size() == 1) {
+            getUsers();
+        } else {
+            userDTOList.remove(0);
+            UserDTO userDTO = userDTOList.get(0);
+            textView.setText(userDTO.getUsername() + "\n" + userDTO.getPreference());
+            Glide.with(Home.this).load(userDTO.getPhoto().replace("localhost", "10.0.2.2")).into(imageView);
+        }
     }
 
     private void hideButtons() {
         likeButton.setVisibility(View.INVISIBLE);
         dislikeButton.setVisibility(View.INVISIBLE);
+        emptyTextView.setVisibility(View.INVISIBLE);
     }
 
     private void displayButtons() {
@@ -130,7 +191,7 @@ public class Home extends AppCompatActivity {
     private Boolean updateMainFragment(Integer integer) {
         switch (integer) {
             case R.id.action_profil:
-                Intent intent = new Intent(Home.this, LoginActivity.class);
+                Intent intent = new Intent(Home.this, Home.class);
                 startActivity(intent);
                 break;
             case R.id.action_events:
