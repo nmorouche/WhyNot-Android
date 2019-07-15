@@ -43,8 +43,6 @@ public class Home extends AppCompatActivity {
     Button likeButton;
     @BindView(R.id.activity_home_dislike_button)
     Button dislikeButton;
-    @BindView(R.id.testbutton)
-    Button test;
     @BindView(R.id.activity_home_empty_tv)
     TextView emptyTextView;
     private SharedPreferences sharedPreferences;
@@ -171,15 +169,15 @@ public class Home extends AppCompatActivity {
         emptyTextView.setText("YA R MA GUEULE");
         emptyTextView.setVisibility(View.VISIBLE);
     }
-    @OnClick(R.id.testbutton)
+    @OnClick(R.id.activity_home_iv)
     void detail(){
         Log.d("wesh","c'est quoi ca ");
-        Intent intent = new Intent(Home.this, Report.class);
-        //intent.putExtra("userName", userDTOList.get(0).getUsername());
-        //intent.putExtra("userBio", userDTOList.get(0).getBio());
-        //intent.putExtra("userBirth",userDTOList.get(0).getBirthdate());
-        //intent.putExtra("userPic", userDTOList.get(0).getPhoto());
-        intent.putExtra("userid", /*userDTOList.get(0).get_id()*/"id");
+        Intent intent = new Intent(Home.this, DetailUser.class);
+        intent.putExtra("userName", userDTOList.get(0).getUsername());
+        intent.putExtra("userBio", userDTOList.get(0).getBio());
+        intent.putExtra("userBirth",userDTOList.get(0).getBirthdate());
+        intent.putExtra("userPic", userDTOList.get(0).getPhoto());
+        intent.putExtra("userid", userDTOList.get(0).get_id());
         startActivity(intent);
     }
 

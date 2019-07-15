@@ -64,15 +64,12 @@ public class Report extends AppCompatActivity {
 
     @OnClick(R.id.activity_report_btn)
     void report(){
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("user", "");
-        UserDTO user = gson.fromJson(json, UserDTO.class);
-        String userId = user.get_id();
-        Log.d("wesh",type +" "+ id +" "+ userId+" "+descTv.getText());
+
+        Log.d("wesh",type +" "+ id +"  "+descTv.getText());
 
         ReportService reportService;
         reportService = NetworkProvider.getClient().create(ReportService.class);
-        ReportDTO reportDTO = new ReportDTO(type, descTv.getText().toString(),userId,id);
+        ReportDTO reportDTO = new ReportDTO(type, descTv.getText().toString(),id);
 
         Call<ReportDTO> reportDTOCall = reportService.report(SharedPref.getToken(),reportDTO);
         reportDTOCall.enqueue(new Callback<ReportDTO>() {

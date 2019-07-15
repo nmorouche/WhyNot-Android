@@ -10,6 +10,6 @@ import retrofit2.http.POST;
 
 public interface ReportService {
 
-    @POST("reports/create")
+    @POST("report/create")
     Call<ReportDTO> report(@Header("x-access-token") String token, @Body ReportDTO reportDTO);
 }

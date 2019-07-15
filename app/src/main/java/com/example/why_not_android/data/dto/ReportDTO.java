@@ -8,15 +8,12 @@ public class ReportDTO {
     private String type;
     @SerializedName("description")
     private String description;
-    @SerializedName("idReporter")
-    private String idReporter;
     @SerializedName("idReported")
     private String idReported;
 
-    public ReportDTO(String type, String description, String idReporter, String idReported) {
+    public ReportDTO(String type, String description, String idReported) {
         this.type = type;
         this.description = description;
-        this.idReporter = idReporter;
         this.idReported = idReported;
     }
 
@@ -36,13 +33,6 @@ public class ReportDTO {
         this.description = description;
     }
 
-    public String getIdReporter() {
-        return idReporter;
-    }
-
-    public void setIdReporter(String idReporter) {
-        this.idReporter = idReporter;
-    }
 
     public String getIdReported() {
         return idReported;
