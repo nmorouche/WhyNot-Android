@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.why_not_android.R;
-import com.example.why_not_android.data.model.Event;
+import com.example.why_not_android.data.Models.Event;
 
 import java.util.List;
 

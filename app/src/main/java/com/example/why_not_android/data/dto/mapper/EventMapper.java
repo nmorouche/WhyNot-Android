@@ -3,7 +3,7 @@ package com.example.why_not_android.data.dto.mapper;
 import android.util.Log;
 
 import com.example.why_not_android.data.dto.EventDTO;
-import com.example.why_not_android.data.model.Event;
+import com.example.why_not_android.data.Models.Event;
 
 import java.util.ArrayList;
 import java.util.List;

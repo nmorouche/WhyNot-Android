@@ -1,4 +1,4 @@
-package com.example.why_not_android.data.model;
+package com.example.why_not_android.data.Models;
 
 public class Event {
     private String  name;

@@ -43,7 +43,7 @@ public class Signup2Activity extends AppCompatActivity {
     RadioGroup genderGr;
     @BindView(R.id.photoImgView)
     ImageView imageView;
-    private String gender = "";
+    private int gender = -1;
 
     private MyPermissions myPermissions;
     private String imgPath = null;
@@ -60,9 +60,9 @@ public class Signup2Activity extends AppCompatActivity {
         myPermissions = MyPermissions.getInstance(this);
         genderGr.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.radioButtonHomme) {
-                gender = "homme";
+                gender = 0;
             } else {
-                gender = "femme";
+                gender = 1;
             }
         });
     }
@@ -161,7 +161,7 @@ public class Signup2Activity extends AppCompatActivity {
             Toast.makeText(this, "Selectionner une image", Toast.LENGTH_SHORT).show();
         } else if (birthdateEdt.getText().toString().length() == 0) {
             Toast.makeText(this, "Entrer une date de naissance", Toast.LENGTH_SHORT).show();
-        } else if (gender.length() == 0) {
+        } else if (gender == -1) {
             Toast.makeText(this, "Selectionner un genre", Toast.LENGTH_SHORT).show();
         } else {
             Signup.getClient().setFileUri(fileUri);

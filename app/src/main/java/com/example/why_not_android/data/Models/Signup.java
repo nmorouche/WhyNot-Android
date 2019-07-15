@@ -8,7 +8,7 @@ public class Signup {
     private String email;
     private String username;
     private String password;
-    private String gender;
+    private int gender;
     private String birthdate;
     private Uri fileUri;
     private File imageFile;
@@ -48,11 +48,11 @@ public class Signup {
         this.password = password;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
