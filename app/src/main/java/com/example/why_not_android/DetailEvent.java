@@ -64,7 +64,7 @@ public class DetailEvent extends AppCompatActivity {
         String date = extras.getString("eventDate");
         eventId = extras.getString("eventid");
         nameTv.setText(name);
-        Glide.with(DetailEvent.this).load(image).into(imageIv);
+        Glide.with(DetailEvent.this).load(image.replace("localhost", "10.0.2.2")).into(imageIv);
         addressTv.setText(address);
         priceTv.setText(price.toString());
         descTv.setText(desc);
@@ -75,7 +75,7 @@ public class DetailEvent extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar_register, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

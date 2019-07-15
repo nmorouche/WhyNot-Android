@@ -82,12 +82,15 @@ public class EventList extends AppCompatActivity {
     }
 
     private Boolean updateMainFragment(Integer integer) {
-        if (integer == R.id.action_profil) {
-            Intent intent = new Intent(EventList.this, Home.class);
-            startActivity(intent);
-        } else if (integer == R.id.action_events) {
-            Intent intent2 = new Intent(EventList.this, EventList.class);
-            startActivity(intent2);
+        switch (integer) {
+            case R.id.action_profil:
+                Intent intent = new Intent(EventList.this, Home.class);
+                startActivity(intent);
+                break;
+            case R.id.action_events:
+                Intent intent2 = new Intent(EventList.this, EventList.class);
+                startActivity(intent2);
+                break;
         }
         return true;
     }

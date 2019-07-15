@@ -44,7 +44,14 @@
         android:text="LIKE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/activity_home_dislike_button"
-        app:layout_constraintTop_toBottomOf="@+id/activity_home_user_description_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_home_user_description_tv"
+        android:layout_marginLeft="10dp" />
+
+    <Button
+        android:id="@+id/testbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/activity_home_dislike_button"/>
 
     <TextView
         android:id="@+id/activity_home_empty_tv"
