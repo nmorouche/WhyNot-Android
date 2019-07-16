@@ -76,7 +76,7 @@ public class Signup3Activity extends AppCompatActivity {
 
         // add another part within the multipart request
         RequestBody email =
-                 RequestBody.create(
+                RequestBody.create(
                         okhttp3.MultipartBody.FORM, Signup.getClient().getEmail());
         RequestBody username =
                 RequestBody.create(
@@ -111,13 +111,10 @@ public class Signup3Activity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SessionDTO> call,
                                    Response<SessionDTO> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     SessionDTO sessionDTO = response.body();
-                    Gson gson = new Gson();
-                    String userJSON = gson.toJson(sessionDTO.getUserDTO());
                     sharedPreferences.edit()
                             .putString("token", sessionDTO.getToken())
-                            .putString("user", userJSON)
                             .apply();
                     Intent intent = new Intent(Signup3Activity.this, Home.class);
                     startActivity(intent);

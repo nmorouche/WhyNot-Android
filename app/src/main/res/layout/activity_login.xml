@@ -31,8 +31,7 @@
             android:layout_marginRight="20dp"
             android:hint="@string/LoginActivity_email_hint"
             android:inputType="text"
-            android:text="nassim@hotmail.fr"
-            app:layout_constraintBottom_toTopOf="@id/loginMailLabel" />
+            android:text="nassim@hotmail.fr" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -44,8 +43,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="@string/mot_de_passe"
-        app:layout_constraintBottom_toTopOf="@id/loginMailEdit" />
+        android:text="@string/mot_de_passe" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -60,8 +58,7 @@
             android:layout_marginRight="20dp"
             android:hint="@string/LoginActivity_password_hint"
             android:inputType="textPassword"
-            android:text="nassim"
-            app:layout_constraintBottom_toTopOf="@id/loginPasswordEdit" />
+            android:text="nassim" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -71,7 +68,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:text="@string/valider"
-        app:layout_constraintBottom_toTopOf="@id/loginPasswordEdit" />
+        android:text="@string/valider" />
 
 </LinearLayout>

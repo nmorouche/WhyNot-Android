@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -60,12 +61,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<SessionDTO> call, Response<SessionDTO> response) {
                 SessionDTO sessionDTO = response.body();
                 if (response.isSuccessful()) {
-                    Gson gson = new Gson();
-                    String userJSON = gson.toJson(sessionDTO.getUserDTO());
+                    Log.d("toz", sessionDTO.getToken());
 
                     sharedPreferences.edit()
                             .putString("token", sessionDTO.getToken())
-                            .putString("user", userJSON)
                             .apply();
                     Intent intent = new Intent(LoginActivity.this, Home.class);
                     startActivity(intent);
@@ -74,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject errorJSON = new JSONObject(response.errorBody().string());
                         Toast.makeText(LoginActivity.this, errorJSON.getString("error"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
+                        Log.d("toz", e.toString());
                         e.printStackTrace();
                     }
                 }
@@ -81,9 +81,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SessionDTO> call, Throwable t) {
+                Log.d("toz", t.toString());
                 t.printStackTrace();
             }
         });
     }
-
 }

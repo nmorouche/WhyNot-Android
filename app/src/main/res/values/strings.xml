@@ -19,4 +19,5 @@
     <string name="LoginActivity_password_hint">Mot de passe</string>
     <string name="LoginActivity_email_hint">Email</string>
     <string name="inscription">Inscription</string>
+    <string name="custom_dialog_message">Vous avez un match avec:</string>
 </resources>

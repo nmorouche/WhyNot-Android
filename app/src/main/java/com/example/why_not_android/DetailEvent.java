@@ -47,7 +47,6 @@ public class DetailEvent extends AppCompatActivity {
     String eventId;
     private SharedPreferences sharedPreferences;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +63,11 @@ public class DetailEvent extends AppCompatActivity {
         String date = extras.getString("eventDate");
         eventId = extras.getString("eventid");
         nameTv.setText(name);
-        Glide.with(DetailEvent.this).load(image.replace("localhost", "10.0.2.2")).into(imageIv);
+        Glide.with(DetailEvent.this).load(image).into(imageIv);
         addressTv.setText(address);
         priceTv.setText(price.toString());
         descTv.setText(desc);
         dateTv.setText(date);
-
-
     }
 
     @Override
@@ -83,20 +80,15 @@ public class DetailEvent extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_register:
-                Gson gson = new Gson();
-                String json = sharedPreferences.getString("user", "");
-                UserDTO user = gson.fromJson(json, UserDTO.class);
-                String userId = user.get_id();
                 EventService eventService;
                 eventService = NetworkProvider.getClient().create(EventService.class);
-                RegisterDTO registerDTO = new RegisterDTO(eventId, userId);
+                RegisterDTO registerDTO = new RegisterDTO(eventId);
                 Call<RegisterDTO> sessionDTOCall = eventService.register(SharedPref.getToken(), registerDTO);
                 sessionDTOCall.enqueue(new Callback<RegisterDTO>() {
                     @Override
                     public void onResponse(Call<RegisterDTO> call, Response<RegisterDTO> response) {
                         RegisterDTO sessionDTO = response.body();
                         if (response.isSuccessful()) {
-
                             Intent intent = new Intent(DetailEvent.this, EventList.class);
                             startActivity(intent);
                         } else if (response.body() == null) {
@@ -114,8 +106,6 @@ public class DetailEvent extends AppCompatActivity {
                         Log.d("toz", t.toString());
                     }
                 });
-                Log.d("toz", userId);
-                Log.d("manger", user.get_id());
                 return true;
         }
         return super.onOptionsItemSelected(item);

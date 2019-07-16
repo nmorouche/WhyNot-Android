@@ -4,17 +4,17 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class SessionDTO {
-    @SerializedName("user")
-    private UserDTO userDTO;
     @SerializedName("token")
     private String token;
+    @SerializedName("error")
+    private String error;
 
-    public UserDTO getUserDTO() {
-        return userDTO;
+    public String getError() {
+        return error;
     }
 
-    public void setUserDTO(UserDTO userDTO) {
-        this.userDTO = userDTO;
+    public void setError(String error) {
+        this.error = error;
     }
 
     public String getToken() {
@@ -28,8 +28,8 @@ public class SessionDTO {
     @Override
     public String toString() {
         return "SessionDTO{" +
-                "userDTO=" + userDTO +
                 ", token='" + token + '\'' +
+                ", error='" + error + '\'' +
                 '}';
     }
 }

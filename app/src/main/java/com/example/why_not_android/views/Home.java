@@ -58,12 +58,12 @@ public class Home extends AppCompatActivity {
         sharedPreferences = SharedPref.getInstance(this);
         hideButtons();
         getUsers();
+
     }
 
     @OnClick(R.id.activity_home_like_button)
     void like() {
         setLiked(userDTOList.get(0).get_id());
-        cleanUserList();
     }
 
     @OnClick(R.id.activity_home_dislike_button)
@@ -87,7 +87,8 @@ public class Home extends AppCompatActivity {
                         UserDTO userDTO = userDTOList.get(0);
                         textView.setText(userDTO.getUsername() + "\n" + userDTO.getPreference());
                         String url = userDTO.getPhoto();
-                        url = url.replace("localhost", "10.0.2.2");
+                        Log.d("toz", url);
+                        //url = url.replace("localhost", "10.0.2.2");
                         Glide.with(Home.this).load(url).into(imageView);
                         displayButtons();
                     } else {
@@ -142,13 +143,17 @@ public class Home extends AppCompatActivity {
             public void onResponse(Call<MatchDTO> call, Response<MatchDTO> response) {
                 if (response.isSuccessful()) {
                     MatchDTO matchDTO = response.body();
-                    if(matchDTO.getMatch() == true) {
+                    if (matchDTO.getMatch()) {
+                        ViewDialog matchDialog = new ViewDialog();
+                        matchDialog.showDialog(Home.this, userDTOList.get(0).getUsername(), userDTOList.get(0).getPhoto(), userDTOList);
+                        cleanUserList();
                         Toast.makeText(Home.this, "UN MATCH BRAVO !", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(Home.this, "Good luck ;)", Toast.LENGTH_SHORT).show();
+                        cleanUserList();
                         setViewed(id);
                     }
-                    
+
                 } else {
                     Log.d("CA MARCHE", "CA MARCHE PAS :(");
                 }
@@ -169,13 +174,14 @@ public class Home extends AppCompatActivity {
         emptyTextView.setText("YA R MA GUEULE");
         emptyTextView.setVisibility(View.VISIBLE);
     }
+
     @OnClick(R.id.activity_home_iv)
-    void detail(){
-        Log.d("wesh","c'est quoi ca ");
+    void detail() {
+        Log.d("wesh", "c'est quoi ca ");
         Intent intent = new Intent(Home.this, DetailUser.class);
         intent.putExtra("userName", userDTOList.get(0).getUsername());
         intent.putExtra("userBio", userDTOList.get(0).getBio());
-        intent.putExtra("userBirth",userDTOList.get(0).getBirthdate());
+        intent.putExtra("userBirth", userDTOList.get(0).getBirthdate());
         intent.putExtra("userPic", userDTOList.get(0).getPhoto());
         intent.putExtra("userid", userDTOList.get(0).get_id());
         startActivity(intent);
