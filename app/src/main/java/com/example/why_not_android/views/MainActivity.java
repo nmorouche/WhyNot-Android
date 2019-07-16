@@ -13,14 +13,10 @@ import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setSupportActionBar(toolbar);
         Button signupbtn = findViewById(R.id.button2);
         signupbtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignupActivity.class);
