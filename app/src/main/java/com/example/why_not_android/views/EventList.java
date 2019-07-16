@@ -1,14 +1,15 @@
 package com.example.why_not_android.views;
 
 import android.content.Intent;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.example.why_not_android.DetailEvent;
 import com.example.why_not_android.data.adapter.EventAdapter;
 import com.example.why_not_android.data.Models.Event;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
@@ -21,25 +22,27 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EventList extends AppCompatActivity {
+public class EventList extends MenuActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private EventAdapter eventAdapter;
-
-    @BindView(R.id.bottom_navigation)
-    BottomNavigationView bottomNavigationView;
     @BindView(R.id.event_rcv)
     RecyclerView eventRcv;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+    private EventAdapter eventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
         ButterKnife.bind(this);
-        this.configureBottomView();
+        setupToolbar();
         initRcv();
         loadData();
     }
-
 
     private void initRcv() {
         Log.d("init", "init");
@@ -77,21 +80,13 @@ public class EventList extends AppCompatActivity {
         });
     }
 
-    private void configureBottomView() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateMainFragment(item.getItemId()));
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
-    private Boolean updateMainFragment(Integer integer) {
-        switch (integer) {
-            case R.id.action_profil:
-                Intent intent = new Intent(EventList.this, Home.class);
-                startActivity(intent);
-                break;
-            case R.id.action_events:
-                Intent intent2 = new Intent(EventList.this, EventList.class);
-                startActivity(intent2);
-                break;
-        }
-        return true;
-    }
 }

@@ -4,30 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.why_not_android.DetailEvent;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
-import com.example.why_not_android.data.dto.RegisterDTO;
-import com.example.why_not_android.data.dto.UserDTO;
-import com.example.why_not_android.data.service.EventService;
-import com.example.why_not_android.data.service.providers.NetworkProvider;
-import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DetailUser extends AppCompatActivity {
     @BindView(R.id.activity_detail_user_bio)

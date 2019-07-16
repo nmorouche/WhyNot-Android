@@ -19,16 +19,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".views.Report"></activity>
+        <activity android:name=".views.MenuActivity"></activity>
+        <activity
+            android:name=".views.Report"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".views.DetailUser" />
-        <activity android:name=".DetailEvent" />
-        <activity android:name=".views.EventList" />
-        <activity android:name=".views.Home" />
-        <activity android:name=".views.Signup3Activity" />
-        <activity android:name=".views.Signup2Activity" />
-        <activity android:name=".views.SignupActivity" />
-        <activity android:name=".views.LoginActivity" />
-        <activity android:name=".views.MainActivity">
+        <activity android:name=".views.DetailEvent" />
+        <activity
+            android:name=".views.EventList"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.Home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.Signup3Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.Signup2Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.SignupActivity"/>
+        <activity
+            android:name=".views.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

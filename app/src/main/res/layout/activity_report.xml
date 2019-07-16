@@ -4,8 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.Report"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".views.Report">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center_horizontal"
+            android:src="@drawable/logosansfond" />
+    </android.support.v7.widget.Toolbar>
 
     <RadioGroup
         android:id="@+id/activity_report_rg"
@@ -34,21 +49,21 @@
         android:id="@+id/activity_report_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginStart="20dp"
-        android:lines="20"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:gravity="center"
+        android:lines="20"
         android:text="TextView" />
 
     <Button
-        android:text="Valider"
-        android:layout_marginTop="20dp"
         android:id="@+id/activity_report_btn"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Valider" />
 
 
 </LinearLayout>

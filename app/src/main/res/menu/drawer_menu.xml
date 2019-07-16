@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_menu_home"
+            android:icon="@drawable/ic_home"
+            android:title="Accueil" />
+        <item
+            android:id="@+id/drawer_menu_match"
+            android:icon="@drawable/ic_match"
+            android:title="Match" />
+
+        <item
+            android:id="@+id/drawer_menu_event"
+            android:icon="@drawable/ic_match"
+            android:title="Événements" />
+        <item
+            android:id="@+id/drawer_menu_my_profil"
+            android:icon="@drawable/ic_my_profil"
+            android:title="Profil" />
+
+    </group>
+
+    <item android:title="Compte">
+        <menu>
+            <item
+                android:id="@+id/drawer_menu_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Share" />
+            <item
+                android:id="@+id/drawer_menu_leave_application"
+                android:icon="@drawable/ic_leave_application"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>

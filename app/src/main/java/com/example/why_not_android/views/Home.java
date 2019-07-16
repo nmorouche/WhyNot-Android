@@ -2,10 +2,16 @@ package com.example.why_not_android.views;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.BottomNavigationView;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.why_not_android.DetailEvent;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.dto.MatchDTO;
@@ -31,10 +36,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Home extends AppCompatActivity {
+public class Home extends MenuActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.bottom_navigation)
-    BottomNavigationView bottomNavigationView;
     @BindView(R.id.activity_home_iv)
     ImageView imageView;
     @BindView(R.id.activity_home_user_description_tv)
@@ -45,6 +48,13 @@ public class Home extends AppCompatActivity {
     Button dislikeButton;
     @BindView(R.id.activity_home_empty_tv)
     TextView emptyTextView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+
     private SharedPreferences sharedPreferences;
     private ArrayList<UserDTO> userDTOList;
 
@@ -54,11 +64,10 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        this.configureBottomView();
         sharedPreferences = SharedPref.getInstance(this);
+        setupToolbar();
         hideButtons();
         getUsers();
-
     }
 
     @OnClick(R.id.activity_home_like_button)
@@ -175,18 +184,6 @@ public class Home extends AppCompatActivity {
         emptyTextView.setVisibility(View.VISIBLE);
     }
 
-    @OnClick(R.id.activity_home_iv)
-    void detail() {
-        Log.d("wesh", "c'est quoi ca ");
-        Intent intent = new Intent(Home.this, DetailUser.class);
-        intent.putExtra("userName", userDTOList.get(0).getUsername());
-        intent.putExtra("userBio", userDTOList.get(0).getBio());
-        intent.putExtra("userBirth", userDTOList.get(0).getBirthdate());
-        intent.putExtra("userPic", userDTOList.get(0).getPhoto());
-        intent.putExtra("userid", userDTOList.get(0).get_id());
-        startActivity(intent);
-    }
-
     private void cleanUserList() {
         if (userDTOList.size() == 1) {
             getUsers();
@@ -209,22 +206,33 @@ public class Home extends AppCompatActivity {
         dislikeButton.setVisibility(View.VISIBLE);
     }
 
-    private void configureBottomView() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateMainFragment(item.getItemId()));
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
-    private Boolean updateMainFragment(Integer integer) {
-        switch (integer) {
-            case R.id.action_profil:
-                Intent intent = new Intent(Home.this, Home.class);
-                startActivity(intent);
-                break;
-            case R.id.action_events:
-                Intent intent2 = new Intent(Home.this, EventList.class);
-                startActivity(intent2);
-                break;
-
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
-        return true;
+    }
+
+    @OnClick(R.id.activity_home_iv)
+    void detail() {
+        Log.d("wesh", "c'est quoi ca ");
+        Intent intent = new Intent(Home.this, DetailUser.class);
+        intent.putExtra("userName", userDTOList.get(0).getUsername());
+        intent.putExtra("userBio", userDTOList.get(0).getBio());
+        intent.putExtra("userBirth", userDTOList.get(0).getBirthdate());
+        intent.putExtra("userPic", userDTOList.get(0).getPhoto());
+        intent.putExtra("userid", userDTOList.get(0).get_id());
+        startActivity(intent);
     }
 }

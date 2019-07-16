@@ -1,9 +1,7 @@
-package com.example.why_not_android;
+package com.example.why_not_android.views;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,13 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.why_not_android.R;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.dto.RegisterDTO;
-import com.example.why_not_android.data.dto.UserDTO;
 import com.example.why_not_android.data.service.EventService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
-import com.example.why_not_android.views.EventList;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -44,7 +40,7 @@ public class DetailEvent extends AppCompatActivity {
     TextView descTv;
     @BindView(R.id.activity_detail_event_date)
     TextView dateTv;
-    String eventId;
+    private String eventId;
     private SharedPreferences sharedPreferences;
 
     @Override

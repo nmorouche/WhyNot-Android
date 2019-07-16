@@ -1,26 +1,26 @@
 package com.example.why_not_android.views;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.Button;
-import android.widget.Toast;
-
-import java.io.IOException;
 
 import com.example.why_not_android.R;
 
+import butterknife.BindView;
+
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setSupportActionBar(toolbar);
         Button signupbtn = findViewById(R.id.button2);
         signupbtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignupActivity.class);
