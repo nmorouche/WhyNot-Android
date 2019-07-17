@@ -22,4 +22,5 @@
     <string name="custom_dialog_message">Vous avez un match avec:</string>
     <string name="navigation_drawer_close">Close drawer</string>
     <string name="navigation_drawer_open">Open Drawer</string>
+    <string name="home_activity_no_users_found">Aucun profil vous correspondant n\'a été trouvé</string>
 </resources>

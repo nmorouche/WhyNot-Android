@@ -180,7 +180,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         textView.setVisibility(View.INVISIBLE);
         likeButton.setVisibility(View.INVISIBLE);
         dislikeButton.setVisibility(View.INVISIBLE);
-        emptyTextView.setText("YA R MA GUEULE");
+        emptyTextView.setText(getString(R.string.home_activity_no_users_found));
         emptyTextView.setVisibility(View.VISIBLE);
     }
 

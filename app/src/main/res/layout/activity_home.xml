@@ -93,7 +93,7 @@
                 android:background="@color/redCharte"
                 android:gravity="center"
                 android:textColor="@color/blueCharte"
-                android:textSize="50sp" />
+                android:textSize="30sp" />
 
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
