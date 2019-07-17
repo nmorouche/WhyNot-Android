@@ -10,6 +10,7 @@ import com.example.why_not_android.data.dto.mapper.EventMapper;
 import com.example.why_not_android.data.Models.Event;
 import com.example.why_not_android.data.service.EventService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,7 +38,7 @@ public class NetworkProvider {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(prodBaseUrl)
+                    .baseUrl(localBaseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -45,7 +46,7 @@ public class NetworkProvider {
     }
 
     private NetworkProvider() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(prodBaseUrl)
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(localBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         eventService = retrofit.create(EventService.class);
@@ -80,8 +81,10 @@ public class NetworkProvider {
                 if (response.isSuccessful()) {
                     EventsDTO eventsDTOList = response.body();
                     List<EventDTO> event = eventsDTOList.getEventDTOArrayList();
-                    List<Event> eventList = EventMapper.map(event);
-                    listener.onSuccess(eventList);
+                    if (event != null) {
+                        List<Event> eventList = EventMapper.map(event);
+                        listener.onSuccess(eventList);
+                    }
                 }
             }
 

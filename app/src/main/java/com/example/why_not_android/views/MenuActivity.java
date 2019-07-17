@@ -49,13 +49,15 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(myEvent);
                 break;
             case R.id.drawer_menu_match:
+                Intent matchList = new Intent(MenuActivity.this, MatchListActivity.class);
+                startActivity(matchList);
                 break;
             case R.id.drawer_menu_logout:
                 break;
             case R.id.drawer_menu_leave_application:
                 break;
         }
-
+        
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

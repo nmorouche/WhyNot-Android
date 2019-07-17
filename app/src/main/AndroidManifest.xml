@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".views.MyEventActivity"></activity>
+        <activity
+            android:name=".views.MatchListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".views.MenuActivity" />
         <activity
             android:name=".views.Report"
