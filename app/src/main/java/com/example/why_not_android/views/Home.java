@@ -2,16 +2,13 @@ package com.example.why_not_android.views;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -154,13 +151,13 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                     MatchDTO matchDTO = response.body();
                     if (matchDTO.getMatch()) {
                         ViewDialog matchDialog = new ViewDialog();
-                        matchDialog.showDialog(Home.this, userDTOList.get(0).getUsername(), userDTOList.get(0).getPhoto(), userDTOList);
+                        String username = userDTOList.get(0).getUsername();
+                        String imageURL = userDTOList.get(0).getPhoto();
                         cleanUserList();
-                        Toast.makeText(Home.this, "UN MATCH BRAVO !", Toast.LENGTH_SHORT).show();
+                        matchDialog.showDialog(Home.this, username, imageURL, userDTOList);
                     } else {
-                        Toast.makeText(Home.this, "Good luck ;)", Toast.LENGTH_SHORT).show();
-                        cleanUserList();
                         setViewed(id);
+                        cleanUserList();
                     }
 
                 } else {

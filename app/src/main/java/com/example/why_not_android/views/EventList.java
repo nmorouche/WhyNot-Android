@@ -67,17 +67,33 @@ public class EventList extends MenuActivity implements NavigationView.OnNavigati
     }
 
     private void loadData() {
-        NetworkProvider.getInstance().getEvents(new NetworkProvider.Listener<List<Event>>() {
-            @Override
-            public void onSuccess(List<Event> data) {
-                eventAdapter.setEventList(data);
-            }
+        Intent i = getIntent();
+        Bundle bundle = i.getExtras();
+        if (bundle != null) {
+            NetworkProvider.getInstance().getMyEvents(new NetworkProvider.Listener<List<Event>>() {
+                @Override
+                public void onSuccess(List<Event> data) {
+                    eventAdapter.setEventList(data);
+                }
 
-            @Override
-            public void onError(Throwable t) {
+                @Override
+                public void onError(Throwable t) {
 
-            }
-        });
+                }
+            });
+        } else {
+            NetworkProvider.getInstance().getEvents(new NetworkProvider.Listener<List<Event>>() {
+                @Override
+                public void onSuccess(List<Event> data) {
+                    eventAdapter.setEventList(data);
+                }
+
+                @Override
+                public void onError(Throwable t) {
+
+                }
+            });
+        }
     }
 
     private void setupToolbar() {

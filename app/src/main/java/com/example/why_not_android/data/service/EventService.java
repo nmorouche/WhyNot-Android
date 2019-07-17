@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 
 public interface EventService {
@@ -18,4 +19,7 @@ public interface EventService {
 
     @POST("events/register")
     Call<RegisterDTO> register(@Header("x-access-token") String token, @Body RegisterDTO registerDTO);
+
+    @GET("events/myevents")
+    Call<EventsDTO> getMyEvents(@Header("x-access-token") String token);
 }

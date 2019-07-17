@@ -72,6 +72,28 @@ public class NetworkProvider {
         });
     }
 
+    public void getMyEvents(Listener<List<Event>> listener) {
+        eventService.getMyEvents(SharedPref.getToken()).enqueue(new Callback<EventsDTO>() {
+
+            @Override
+            public void onResponse(Call<EventsDTO> call, Response<EventsDTO> response) {
+                if (response.isSuccessful()) {
+                    EventsDTO eventsDTOList = response.body();
+                    List<EventDTO> event = eventsDTOList.getEventDTOArrayList();
+                    List<Event> eventList = EventMapper.map(event);
+                    listener.onSuccess(eventList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventsDTO> call, Throwable t) {
+                listener.onError(t);
+                Log.d("toz", "fail");
+            }
+        });
+    }
+
+
     public interface Listener<T> {
         void onSuccess(T data);
 

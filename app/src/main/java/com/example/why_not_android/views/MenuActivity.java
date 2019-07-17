@@ -43,6 +43,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 Intent event = new Intent(MenuActivity.this, EventList.class);
                 startActivity(event);
                 break;
+            case R.id.drawer_menu_my_event:
+                Intent myEvent = new Intent(MenuActivity.this, EventList.class);
+                myEvent.putExtra("myEvent", true);
+                startActivity(myEvent);
+                break;
             case R.id.drawer_menu_match:
                 break;
             case R.id.drawer_menu_logout:

@@ -103,21 +103,7 @@ public class Signup2Activity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_CAMERA) {
-            try {
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-                imageView.setImageBitmap(photo);
-
-                // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
-                this.fileUri = getImageUri(getApplicationContext(), photo);
-
-                // CALL THIS METHOD TO GET THE ACTUAL PATH
-                imgPath = getRealPathFromURI(this.fileUri);
-                imageFile = new File(imgPath);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (requestCode == PICK_IMAGE_GALLERY) {
+        if (requestCode == PICK_IMAGE_GALLERY) {
             if(resultCode == RESULT_OK){
                 Uri selectedImage = data.getData();
                 try {

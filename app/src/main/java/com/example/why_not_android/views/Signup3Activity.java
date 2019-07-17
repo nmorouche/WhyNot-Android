@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -126,6 +127,7 @@ public class Signup3Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SessionDTO> call, Throwable t) {
+                Log.d("toz", t.toString());
                 Toast.makeText(Signup3Activity.this, "CA MARCHE PAS", Toast.LENGTH_SHORT).show();
             }
         });

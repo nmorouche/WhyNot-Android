@@ -28,7 +28,7 @@ public class ViewDialog {
         TextView matchWithUsername = (TextView) dialog.findViewById(R.id.custom_match_dialog_text);
         Button dialogButton = (Button) dialog.findViewById(R.id.custom_match_dialog_button_dismiss);
         ImageView userImage = (ImageView) dialog.findViewById(R.id.custom_match_dialog_image);
-        matchWithUsername.setText(String.format("%s%s%s", activity.getString(R.string.custom_dialog_message),"\n", username));
+        matchWithUsername.setText(String.format("%s%s%s", activity.getString(R.string.custom_dialog_message), "\n", username));
         String url = image.replace("localhost", "10.0.2.2");
         Glide.with(activity).load(url).into(userImage);
         dialogButton.setOnClickListener(new View.OnClickListener() {
