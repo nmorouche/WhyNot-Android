@@ -37,12 +37,12 @@
             tools:context=".views.MatchListActivity">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/event_rcv"
+                android:id="@+id/match_rcv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
                 tools:layout_editor_absoluteX="0dp"
-                tools:listitem="@layout/item_event" />
+                tools:listitem="@layout/item_match" />
 
         </RelativeLayout>
     </LinearLayout>

@@ -5,6 +5,7 @@ import com.example.why_not_android.data.dto.RegisterResultDTO;
 import com.example.why_not_android.data.dto.UserDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -22,4 +23,7 @@ public interface UserService {
 
     @PUT("users/like")
     Call<MatchDTO> like(@Header("x-access-token") String token, @Query("_id") String id);
+
+    @GET("users/match")
+    Call<List<UserDTO>> getMatch(@Header("x-access-token") String token);
 }

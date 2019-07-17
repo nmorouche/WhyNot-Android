@@ -1,13 +1,13 @@
 package com.example.why_not_android.data.Models;
 
 public class Event {
-    private String  name;
-    private String  _id;
-    private String  description;
-    private String  address;
+    private String name;
+    private String _id;
+    private String description;
+    private String address;
     private String date;
-    private String  imageURL;
-    private int  price;
+    private String imageURL;
+    private int price;
 
     public String get_id() {
         return _id;

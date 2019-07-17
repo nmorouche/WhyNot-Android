@@ -223,7 +223,6 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
 
     @OnClick(R.id.activity_home_iv)
     void detail() {
-        Log.d("wesh", "c'est quoi ca ");
         Intent intent = new Intent(Home.this, DetailUser.class);
         intent.putExtra("userName", userDTOList.get(0).getUsername());
         intent.putExtra("userBio", userDTOList.get(0).getBio());
