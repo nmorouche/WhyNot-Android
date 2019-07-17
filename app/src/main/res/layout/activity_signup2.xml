@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".views.Signup2Activity">
 
@@ -23,7 +24,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:text="@string/photo" />
+        android:background="@color/redCharte"
+        android:text="@string/photo"
+        android:textColor="@color/blueCharte" />
 
     <TextView
         android:id="@+id/signup2BirthdateLabel"
@@ -33,7 +36,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="@string/date_de_naissance" />
+        android:text="@string/date_de_naissance"
+        android:textColor="@color/redCharte"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/signup2Birthdate"
@@ -42,7 +47,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:focusable="false" />
+        android:focusable="false"
+        android:textColor="@color/blueCharte" />
 
     <TextView
         android:id="@+id/signup2GenderLabel"
@@ -52,7 +58,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="@string/sexe" />
+        android:text="@string/sexe"
+        android:textColor="@color/redCharte"
+        android:textSize="20sp" />
 
     <RadioGroup
         android:id="@+id/signup2radioGroup"
@@ -68,13 +76,15 @@
             android:id="@+id/radioButtonHomme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/homme" />
+            android:text="@string/homme"
+            android:textColor="@color/blueCharte" />
 
         <RadioButton
             android:id="@+id/radioButtonFemme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/femme" />
+            android:text="@string/femme"
+            android:textColor="@color/redCharte" />
     </RadioGroup>
 
     <Button
@@ -84,6 +94,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:text="@string/suivant" />
+        android:background="@color/blueCharte"
+        android:text="@string/suivant"
+        android:textColor="@color/redCharte" />
 
 </LinearLayout>

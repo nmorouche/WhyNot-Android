@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.MainActivity">
+    tools:context=".views.MainActivity"
+    android:background="@color/colorPrimary"
+    >
 
-    <Button
-
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginRight="20dp"
-        android:text="@string/signup" />
+        android:src="@drawable/logosansfond" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/blueCharte"
+        android:background="@color/redCharte"
+        android:text="@string/login" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:text="@string/login"
+        android:background="@color/blueCharte"
+        android:textColor="@color/redCharte"
+        android:text="@string/signup" />
 
-        app:layout_constraintBottom_toTopOf="@id/button2" />
+
 </LinearLayout>

@@ -26,9 +26,7 @@
         android:id="@+id/activity_report_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="70dp"
-        android:layout_marginEnd="20dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -36,13 +34,15 @@
             android:id="@+id/radioButtonFake"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fake" />
+            android:text="Fake"
+            android:textColor="@color/redCharte" />
 
         <RadioButton
             android:id="@+id/radioButtonVulgaire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vulgaire" />
+            android:text="Vulgaire"
+            android:textColor="@color/redCharte" />
     </RadioGroup>
 
     <android.support.design.widget.TextInputEditText
@@ -54,7 +54,8 @@
         android:layout_marginEnd="20dp"
         android:gravity="center"
         android:lines="20"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/blueCharte" />
 
     <Button
         android:id="@+id/activity_report_btn"
@@ -63,7 +64,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Valider" />
+        android:background="@color/blueCharte"
+        android:text="Valider"
+        android:textColor="@color/redCharte" />
 
 
 </LinearLayout>
