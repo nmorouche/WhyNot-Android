@@ -13,7 +13,7 @@ public class EventMapper {
     public static List<Event> map(List<EventDTO> eventDTOList) {
         List<Event> eventList = new ArrayList<>();
         for (EventDTO eventDTO : eventDTOList) {
-            Log.d("event",eventDTO.toString());
+            Log.d("event", eventDTO.toString());
             eventList.add(map(eventDTO));
         }
         return eventList;
@@ -27,7 +27,7 @@ public class EventMapper {
         event.setDate(eventDTO.getDate());
         event.setImageURL(eventDTO.getImageURL());
         event.setPrice(eventDTO.getPrice());
-       event.set_id(eventDTO.get_id());
+        event.set_id(eventDTO.get_id());
         return event;
     }
 }

@@ -73,7 +73,7 @@ public class EventList extends MenuActivity implements NavigationView.OnNavigati
             NetworkProvider.getInstance().getMyEvents(new NetworkProvider.Listener<List<Event>>() {
                 @Override
                 public void onSuccess(List<Event> data) {
-                    if(data.size() > 0) {
+                    if (data.size() > 0) {
                         eventAdapter.setEventList(data);
                     } else {
                     }

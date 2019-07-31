@@ -74,16 +74,13 @@ public class MyPermissions {
         final CharSequence[] options = {"Choose From Gallery", "Cancel"};
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
         builder.setTitle("Select Option");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Choose From Gallery")) {
-                    dialog.dismiss();
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    context.startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
-                } else if (options[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
+        builder.setItems(options, (dialog, item) -> {
+            if (options[item].equals("Choose From Gallery")) {
+                dialog.dismiss();
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                context.startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
+            } else if (options[item].equals("Cancel")) {
+                dialog.dismiss();
             }
         });
         builder.show();

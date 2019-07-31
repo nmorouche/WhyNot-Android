@@ -1,6 +1,7 @@
 package com.example.why_not_android.views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,14 +9,30 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.why_not_android.R;
+import com.example.why_not_android.data.SharedPreferences.SharedPref;
+
+import butterknife.BindView;
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.drawer_username)
+    TextView username;
+    @BindView(R.id.drawer_email)
+    TextView email;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = SharedPref.getInstance(this);
+        setInformations();
+    }
+
+    private void setInformations() {
+
     }
 
     @Override
@@ -57,7 +74,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             case R.id.drawer_menu_leave_application:
                 break;
         }
-        
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

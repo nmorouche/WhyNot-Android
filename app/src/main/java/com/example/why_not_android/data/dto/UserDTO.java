@@ -26,7 +26,7 @@ public class UserDTO {
     @SerializedName("banned")
     private String banned;
 
-    public  String get_id() {
+    public String get_id() {
         return _id;
     }
 

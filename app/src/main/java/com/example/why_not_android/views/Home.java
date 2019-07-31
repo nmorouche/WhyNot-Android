@@ -151,10 +151,10 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                     MatchDTO matchDTO = response.body();
                     if (matchDTO.getMatch()) {
                         ViewDialog matchDialog = new ViewDialog();
-                        String username = userDTOList.get(0).getUsername();
-                        String imageURL = userDTOList.get(0).getPhoto();
+                        String mUsername = userDTOList.get(0).getUsername();
+                        String mImageURL = userDTOList.get(0).getPhoto();
                         cleanUserList();
-                        matchDialog.showDialog(Home.this, username, imageURL, userDTOList);
+                        matchDialog.showDialog(Home.this, mUsername, mImageURL, userDTOList);
                     } else {
                         setViewed(id);
                         cleanUserList();

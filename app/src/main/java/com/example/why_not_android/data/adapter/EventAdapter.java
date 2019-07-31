@@ -32,20 +32,22 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     @NonNull
-    @Override public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    @Override
+    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_event, viewGroup, false);
         return new EventViewHolder(view);
     }
 
-    @Override public void onBindViewHolder(@NonNull EventViewHolder eventViewHolder, int i) {
+    @Override
+    public void onBindViewHolder(@NonNull EventViewHolder eventViewHolder, int i) {
 
         Event event = eventList.get(i);
-        Log.d("bind",event.getName());
+        Log.d("bind", event.getName());
         eventViewHolder.nameTv.setText(event.getName());
         eventViewHolder.dateTv.setText(event.getDate());
-        Glide.with(eventViewHolder.itemView).load(event.getImageURL().replace("localhost","10.0.2.2")).into(eventViewHolder.pictureImv);
+        Glide.with(eventViewHolder.itemView).load(event.getImageURL().replace("localhost", "10.0.2.2")).into(eventViewHolder.pictureImv);
 
-        if (itemClickListener!= null){
+        if (itemClickListener != null) {
             eventViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -55,7 +57,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
     }
 
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return eventList != null ? eventList.size() : 0;
     }
 
@@ -64,15 +67,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         ImageView pictureImv;
         @BindView(R.id.itemTextViewDate)
         TextView dateTv;
-        @BindView(R.id.itemTextViewName) TextView nameTv;
+        @BindView(R.id.itemTextViewName)
+        TextView nameTv;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
 
     }
-    public interface ItemClickListener{
+
+    public interface ItemClickListener {
         void onclick(Event event);
     }
 }
