@@ -10,7 +10,7 @@
             android:title="Accueil" />
         <item
             android:id="@+id/drawer_menu_match"
-            android:icon="@drawable/ic_match"
+            android:icon="@drawable/matchlogo"
             android:title="Match" />
 
         <item
@@ -24,11 +24,11 @@
         <menu>
             <item
                 android:id="@+id/drawer_menu_event"
-                android:icon="@drawable/ic_match"
+                android:icon="@drawable/ic_group_add_black_24dp"
                 android:title="Tous les événements" />
             <item
                 android:id="@+id/drawer_menu_my_event"
-                android:icon="@drawable/ic_match"
+                android:icon="@drawable/ic_thumb_up_black_24dp"
                 android:title="Mes inscriptions" />
         </menu>
     </item>

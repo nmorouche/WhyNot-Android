@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.why_not_android.R;
@@ -61,10 +62,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<SessionDTO> call, Response<SessionDTO> response) {
                 SessionDTO sessionDTO = response.body();
                 if (response.isSuccessful()) {
-                    Log.d("toz", sessionDTO.getToken());
-
                     sharedPreferences.edit()
                             .putString("token", sessionDTO.getToken())
+                            .putString("email", sessionDTO.getEmail())
+                            .putString("username", sessionDTO.getUsername())
+                            .putString("photo", sessionDTO.getPhoto())
                             .apply();
                     Intent intent = new Intent(LoginActivity.this, Home.class);
                     startActivity(intent);

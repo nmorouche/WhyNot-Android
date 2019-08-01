@@ -23,4 +23,7 @@
     <string name="navigation_drawer_close">Close drawer</string>
     <string name="navigation_drawer_open">Open Drawer</string>
     <string name="home_activity_no_users_found">Aucun profil vous correspondant n\'a été trouvé</string>
+    <string name="activity_my_profil_edit_email_edit_text">Email</string>
+    <string name="activity_my_profil_edit_username_edit_text">Username</string>
+    <string name="activity_my_profil_edit_password_edit_text">Password</string>
 </resources>

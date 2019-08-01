@@ -6,7 +6,6 @@
         android:id="@+id/action_report"
         android:enabled="true"
         android:title="Report"
-
         app:showAsAction="ifRoom" />
 
 </menu>

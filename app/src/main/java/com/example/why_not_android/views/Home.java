@@ -9,6 +9,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,6 +26,8 @@ import com.example.why_not_android.data.dto.RegisterResultDTO;
 import com.example.why_not_android.data.dto.UserDTO;
 import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -95,7 +100,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                         String url = userDTO.getPhoto();
                         Log.d("toz", url);
                         //url = url.replace("localhost", "10.0.2.2");
-                        Glide.with(Home.this).load(url).into(imageView);
+                        Glide.with(Home.this).load(url.replace("localhost","10.0.2.2")).into(imageView);
                         displayButtons();
                     } else {
                         emptyUserList();
@@ -210,6 +215,14 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        View header = navigationView.getHeaderView(0);
+        TextView drawerUsername = (TextView) header.findViewById(R.id.drawer_username);
+        TextView drawerEmail = (TextView) header.findViewById(R.id.drawer_email);
+        ImageView drawerImageView = (ImageView) header.findViewById(R.id.drawer_image);
+        String image = sharedPreferences.getString("photo", "");
+        Glide.with(Home.this).load(image.replace("localhost", "10.0.2.2")).into(drawerImageView);
+        drawerEmail.setText(sharedPreferences.getString("email", ""));
+        drawerUsername.setText(sharedPreferences.getString("username", ""));
     }
 
     @Override

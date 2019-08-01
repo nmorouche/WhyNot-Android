@@ -13,7 +13,6 @@ public class EventMapper {
     public static List<Event> map(List<EventDTO> eventDTOList) {
         List<Event> eventList = new ArrayList<>();
         for (EventDTO eventDTO : eventDTOList) {
-            Log.d("event", eventDTO.toString());
             eventList.add(map(eventDTO));
         }
         return eventList;
