@@ -9,12 +9,14 @@ public class UserDTO {
     private String email;
     @SerializedName("username")
     private String username;
+    @SerializedName("password")
+    private String password;
     @SerializedName("photo")
     private String photo;
     @SerializedName("birthdate")
     private String birthdate;
-    @SerializedName("sexe")
-    private String sexe;
+    @SerializedName("gender")
+    private int gender;
     @SerializedName("preference")
     private int preference;
     @SerializedName("bio")
@@ -28,10 +30,6 @@ public class UserDTO {
 
     public String get_id() {
         return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
     }
 
     public String getEmail() {
@@ -62,16 +60,24 @@ public class UserDTO {
         return birthdate;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
-    public String getSexe() {
-        return sexe;
+    public int getGender() {
+        return gender;
     }
 
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     public int getPreference() {
@@ -122,7 +128,7 @@ public class UserDTO {
                 ", username='" + username + '\'' +
                 ", photo='" + photo + '\'' +
                 ", birthdate='" + birthdate + '\'' +
-                ", sexe='" + sexe + '\'' +
+                ", gender='" + gender + '\'' +
                 ", preference='" + preference + '\'' +
                 ", bio='" + bio + '\'' +
                 ", createdAt='" + createdAt + '\'' +

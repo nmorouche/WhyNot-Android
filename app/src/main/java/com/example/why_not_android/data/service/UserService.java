@@ -18,6 +18,9 @@ public interface UserService {
     @GET("users")
     Call<ArrayList<UserDTO>> getUsers(@Header("x-access-token") String token);
 
+    @GET("users/myAccount")
+    Call<UserDTO> myAccount(@Header("x-access-token") String token);
+
     @PATCH("users/viewers")
     Call<RegisterResultDTO> setViewed(@Header("x-access-token") String token, @Query("_id") String id);
 

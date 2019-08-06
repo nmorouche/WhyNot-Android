@@ -58,7 +58,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="@string/sexe"
+        android:text="@string/gender"
         android:textColor="@color/redCharte"
         android:textSize="20sp" />
 
@@ -94,7 +94,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:background="@color/blueCharte"
+        android:background="@drawable/button_shape_blue"
         android:text="@string/suivant"
         android:textColor="@color/redCharte" />
 

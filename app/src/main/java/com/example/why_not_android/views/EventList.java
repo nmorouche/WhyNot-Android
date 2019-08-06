@@ -120,6 +120,10 @@ public class EventList extends MenuActivity implements NavigationView.OnNavigati
         TextView drawerUsername = (TextView) header.findViewById(R.id.drawer_username);
         TextView drawerEmail = (TextView) header.findViewById(R.id.drawer_email);
         ImageView drawerImageView = (ImageView) header.findViewById(R.id.drawer_image);
+        header.setOnClickListener(v -> {
+            Intent myProfil = new Intent(this, MyProfilActivity.class);
+            startActivity(myProfil);
+        });
         String image = sharedPreferences.getString("photo", "");
         Glide.with(this).load(image.replace("localhost", "10.0.2.2")).into(drawerImageView);
         drawerEmail.setText(sharedPreferences.getString("email", ""));

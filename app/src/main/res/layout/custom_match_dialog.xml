@@ -40,11 +40,11 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginEnd="20dp"
-            android:background="@android:color/white"
+            android:background="@drawable/button_shape_red"
             android:clickable="true"
             android:focusable="true"
             android:text="FERMER"
-            android:textColor="#5DBCD2"
+            android:textColor="@color/blueCharte"
             android:textStyle="bold" />
 
         <Button
@@ -52,11 +52,11 @@
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="@android:color/white"
+            android:background="@drawable/button_shape_red"
             android:clickable="true"
             android:focusable="true"
             android:text="MATCH"
-            android:textColor="#5DBCD2"
+            android:textColor="@color/blueCharte"
             android:textStyle="bold" />
 
     </LinearLayout>

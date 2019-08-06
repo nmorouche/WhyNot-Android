@@ -31,13 +31,7 @@ public class ViewDialog {
         matchWithUsername.setText(String.format("%s%s%s", activity.getString(R.string.custom_dialog_message), "\n", username));
         String url = image.replace("localhost", "10.0.2.2");
         Glide.with(activity).load(url).into(userImage);
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
+        dialogButton.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
 }

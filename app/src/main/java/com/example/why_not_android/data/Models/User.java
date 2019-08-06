@@ -6,7 +6,7 @@ public class User {
     private String username;
     private String photo;
     private String birthdate;
-    private String sexe;
+    private int gender;
     private int preference;
     private String bio;
     private String createdAt;
@@ -53,12 +53,12 @@ public class User {
         this.birthdate = birthdate;
     }
 
-    public String getSexe() {
-        return sexe;
+    public int getGender() {
+        return gender;
     }
 
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     public int getPreference() {
@@ -109,7 +109,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", photo='" + photo + '\'' +
                 ", birthdate='" + birthdate + '\'' +
-                ", sexe='" + sexe + '\'' +
+                ", gender='" + gender + '\'' +
                 ", preference='" + preference + '\'' +
                 ", bio='" + bio + '\'' +
                 ", createdAt='" + createdAt + '\'' +

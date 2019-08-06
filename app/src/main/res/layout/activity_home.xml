@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:foregroundGravity="center_horizontal"
+                android:paddingRight="50dp"
                 android:src="@drawable/logosansfond" />
         </android.support.v7.widget.Toolbar>
 
@@ -40,10 +41,10 @@
             android:orientation="vertical"
             tools:context=".views.Home">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/activity_home_iv"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +67,7 @@
                 android:id="@+id/activity_home_dislike_button"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:background="@color/blueCharte"
+                android:background="@drawable/button_shape_blue"
                 android:text="DISLIKE"
                 android:textColor="@color/redCharte"
                 app:layout_constraintEnd_toStartOf="@+id/activity_home_like_button"
@@ -79,7 +80,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@color/redCharte"
+                android:background="@drawable/button_shape_red"
                 android:text="LIKE"
                 android:textColor="@color/blueCharte"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -2,6 +2,7 @@ package com.example.why_not_android.views;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -26,6 +27,10 @@ import com.example.why_not_android.data.dto.RegisterResultDTO;
 import com.example.why_not_android.data.dto.UserDTO;
 import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.w3c.dom.Text;
 
@@ -60,6 +65,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
     private SharedPreferences sharedPreferences;
     private ArrayList<UserDTO> userDTOList;
 
+    private String TAG = "Home";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,22 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         setupToolbar();
         hideButtons();
         getUsers();
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        Log.d(TAG, token);
+                    }
+                });
     }
 
     @OnClick(R.id.activity_home_like_button)
@@ -100,7 +122,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                         String url = userDTO.getPhoto();
                         Log.d("toz", url);
                         //url = url.replace("localhost", "10.0.2.2");
-                        Glide.with(Home.this).load(url.replace("localhost","10.0.2.2")).into(imageView);
+                        Glide.with(Home.this).load(url.replace("localhost", "10.0.2.2")).into(imageView);
                         displayButtons();
                     } else {
                         emptyUserList();
@@ -144,6 +166,10 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
     }
 
     void setLiked(String id) {
+        String mUsername = userDTOList.get(0).getUsername();
+        String mImageURL = userDTOList.get(0).getPhoto();
+        setViewed(id);
+        cleanUserList();
         UserService userService;
         userService = NetworkProvider.getClient().create(UserService.class);
         String token = sharedPreferences.getString("token", "");
@@ -156,15 +182,11 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                     MatchDTO matchDTO = response.body();
                     if (matchDTO.getMatch()) {
                         ViewDialog matchDialog = new ViewDialog();
-                        String mUsername = userDTOList.get(0).getUsername();
-                        String mImageURL = userDTOList.get(0).getPhoto();
-                        cleanUserList();
                         matchDialog.showDialog(Home.this, mUsername, mImageURL, userDTOList);
                     } else {
                         setViewed(id);
                         cleanUserList();
                     }
-
                 } else {
                     Log.d("CA MARCHE", "CA MARCHE PAS :(");
                 }
@@ -219,6 +241,10 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         TextView drawerUsername = (TextView) header.findViewById(R.id.drawer_username);
         TextView drawerEmail = (TextView) header.findViewById(R.id.drawer_email);
         ImageView drawerImageView = (ImageView) header.findViewById(R.id.drawer_image);
+        header.setOnClickListener(v -> {
+            Intent myProfil = new Intent(this, MyProfilActivity.class);
+            startActivity(myProfil);
+        });
         String image = sharedPreferences.getString("photo", "");
         Glide.with(Home.this).load(image.replace("localhost", "10.0.2.2")).into(drawerImageView);
         drawerEmail.setText(sharedPreferences.getString("email", ""));

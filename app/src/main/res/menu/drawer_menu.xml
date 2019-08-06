@@ -12,12 +12,6 @@
             android:id="@+id/drawer_menu_match"
             android:icon="@drawable/matchlogo"
             android:title="Match" />
-
-        <item
-            android:id="@+id/drawer_menu_my_profil"
-            android:icon="@drawable/ic_my_profil"
-            android:title="Profil" />
-
     </group>
 
     <item android:title="Événements">
@@ -36,13 +30,13 @@
     <item android:title="Compte">
         <menu>
             <item
+                android:id="@+id/drawer_menu_my_profil"
+                android:icon="@drawable/ic_my_profil"
+                android:title="Profil" />
+            <item
                 android:id="@+id/drawer_menu_logout"
                 android:icon="@drawable/ic_logout"
-                android:title="Share" />
-            <item
-                android:id="@+id/drawer_menu_leave_application"
-                android:icon="@drawable/ic_leave_application"
-                android:title="Send" />
+                android:title="Deconnexion" />
         </menu>
     </item>
 

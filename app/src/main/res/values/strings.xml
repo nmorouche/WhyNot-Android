@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Why_not_android</string>
+    <string name="app_name">WhyNot</string>
     <string name="signup">Signup</string>
     <string name="login">Login</string>
     <string name="adresse_mail">Adresse mail</string>
@@ -12,7 +12,7 @@
     <string name="date_de_naissance">Date de naissance</string>
     <string name="homme">Homme</string>
     <string name="femme">Femme</string>
-    <string name="sexe">Sexe</string>
+    <string name="gender">Sexe</string>
     <string name="les_deux">Les deux</string>
     <string name="pr_ference">Préference</string>
     <string name="biographie">Biographie</string>
@@ -26,4 +26,5 @@
     <string name="activity_my_profil_edit_email_edit_text">Email</string>
     <string name="activity_my_profil_edit_username_edit_text">Username</string>
     <string name="activity_my_profil_edit_password_edit_text">Password</string>
+    <string name="activity_my_profil_preferences">Préférences</string>
 </resources>

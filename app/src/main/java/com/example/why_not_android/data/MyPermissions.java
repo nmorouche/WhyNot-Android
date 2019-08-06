@@ -16,7 +16,7 @@ import android.widget.Switch;
 public class MyPermissions {
 
     public int EXTERNAL_STORAGE_PERMISSION = 1;
-    public final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
+    public final int PICK_IMAGE_GALLERY = 2;
     public final int NOTIFICATION_PERMISSION = 1;
 
     private Activity context;
@@ -45,19 +45,9 @@ public class MyPermissions {
                 new AlertDialog.Builder(context)
                         .setTitle("Media access needed")
                         .setMessage("We need this permission to let you take a photo of you.")
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(context,
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, EXTERNAL_STORAGE_PERMISSION);
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
+                        .setPositiveButton("Ok", (dialog, which) -> ActivityCompat.requestPermissions(context,
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, EXTERNAL_STORAGE_PERMISSION))
+                        .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                         .create().show();
             } else {
                 ActivityCompat.requestPermissions(context,

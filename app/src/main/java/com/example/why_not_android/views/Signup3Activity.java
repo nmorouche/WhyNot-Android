@@ -119,6 +119,7 @@ public class Signup3Activity extends AppCompatActivity {
                             .putString("token", sessionDTO.getToken())
                             .apply();
                     Intent intent = new Intent(Signup3Activity.this, Home.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else {
                     Toast.makeText(Signup3Activity.this, "Erreur lors de l'enregistrement", Toast.LENGTH_SHORT).show();

@@ -68,8 +68,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(matchList);
                 break;
             case R.id.drawer_menu_logout:
-                break;
-            case R.id.drawer_menu_leave_application:
+                Intent main = new Intent(MenuActivity.this, MainActivity.class);
+                main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                sharedPreferences.edit().clear().apply();
+                startActivity(main);
                 break;
         }
 

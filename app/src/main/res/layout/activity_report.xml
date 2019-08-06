@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:foregroundGravity="center_horizontal"
+            android:paddingRight="50dp"
             android:src="@drawable/logosansfond" />
     </android.support.v7.widget.Toolbar>
 

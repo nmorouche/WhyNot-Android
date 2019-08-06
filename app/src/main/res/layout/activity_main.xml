@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".views.MainActivity"
     android:background="@color/colorPrimary"
-    >
+    android:orientation="vertical"
+    tools:context=".views.MainActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -20,9 +19,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="100dp"
         android:layout_marginRight="20dp"
-        android:textColor="@color/blueCharte"
-        android:background="@color/redCharte"
-        android:text="@string/login" />
+        android:background="@drawable/button_shape_red"
+        android:text="@string/login"
+        android:textColor="@color/blueCharte" />
 
     <Button
         android:id="@+id/button2"
@@ -31,9 +30,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:background="@color/blueCharte"
-        android:textColor="@color/redCharte"
-        android:text="@string/signup" />
-
+        android:background="@drawable/button_shape_blue"
+        android:text="@string/signup"
+        android:textColor="@color/redCharte" />
 
 </LinearLayout>

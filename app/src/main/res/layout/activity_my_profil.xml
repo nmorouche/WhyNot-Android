@@ -19,20 +19,26 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:foregroundGravity="center_horizontal"
-                android:src="@drawable/logosansfond" />
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="50dp"
+                    android:src="@drawable/logosansfond" />
+            </LinearLayout>
+
+
         </android.support.v7.widget.Toolbar>
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".views.MyProfilActivity">
@@ -49,9 +55,10 @@
 
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/toz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/shape"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,19 +76,48 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/activity_my_profil_username_text_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="WATOZ 3LA MOK"
+                <ImageView
+                    android:id="@+id/activity_my_profil_edit_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_mode_edit_black_24dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/activity_my_profil_male_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/male_logo"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/activity_my_profil_informations_label_text_view" />
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/activity_my_profil_female_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/female_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/activity_my_profil_cancel_edit_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_cancel_black_24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/activity_my_profil_input_layout_1"
+                    android:id="@+id/activity_my_profil_email_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -101,12 +137,12 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/activity_my_profil_input_layout_2"
+                    android:id="@+id/activity_my_profil_username_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/activity_my_profil_input_layout_1">
+                    app:layout_constraintTop_toBottomOf="@id/activity_my_profil_email_input_layout">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/activity_my_profil_username_edit_text"
@@ -122,12 +158,12 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/activity_my_profil_input_layout_3"
+                    android:id="@+id/activity_my_profil_password_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/activity_my_profil_input_layout_2">
+                    app:layout_constraintTop_toBottomOf="@id/activity_my_profil_username_input_layout">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/activity_my_profil_password_edit_text"
@@ -141,6 +177,41 @@
                         android:textColor="@color/blueCharte" />
 
                 </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/activity_my_profil_preferences"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/activity_my_profil_preferences"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_my_profil_password_input_layout" />
+
+                <RadioGroup
+                    android:id="@+id/activity_my_profil_gender_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/activity_my_profil_preferences">
+
+                    <RadioButton
+                        android:id="@+id/activity_my_profil_male_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/homme"
+                        android:textColor="@color/blueCharte" />
+
+                    <RadioButton
+                        android:id="@+id/activity_my_profil_female_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/femme"
+                        android:textColor="@color/redCharte" />
+                </RadioGroup>
 
             </android.support.constraint.ConstraintLayout>
 
