@@ -1,6 +1,7 @@
 package com.example.why_not_android.views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.Models.Signup;
+import com.example.why_not_android.data.SharedPreferences.SharedPref;
 //import com.example.why_not_android.data.Models.Signup;
 
 import java.util.regex.Matcher;
@@ -26,11 +28,14 @@ public class SignupActivity extends AppCompatActivity {
     @BindView(R.id.signupPasswordEdit)
     EditText passwordEdit;
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
+        sharedPreferences = SharedPref.getInstance(this);
     }
 
     @OnClick(R.id.signupButton)
@@ -45,6 +50,10 @@ public class SignupActivity extends AppCompatActivity {
             Signup.getClient().setEmail(mailEdit.getText().toString());
             Signup.getClient().setUsername(usernameEdit.getText().toString());
             Signup.getClient().setPassword(passwordEdit.getText().toString());
+            sharedPreferences
+                    .edit()
+                    .putString("password", passwordEdit.getText().toString())
+                    .apply();
             Intent intent = new Intent(SignupActivity.this, Signup2Activity.class);
             startActivity(intent);
         }

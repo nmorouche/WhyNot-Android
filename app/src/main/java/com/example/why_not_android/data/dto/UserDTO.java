@@ -32,6 +32,10 @@ public class UserDTO {
         return _id;
     }
 
+    public void set_id(String id) {
+        this._id = id;
+    }
+
     public String getEmail() {
         return email;
     }

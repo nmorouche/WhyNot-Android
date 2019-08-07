@@ -67,8 +67,10 @@ public class LoginActivity extends AppCompatActivity {
                             .putString("email", sessionDTO.getEmail())
                             .putString("username", sessionDTO.getUsername())
                             .putString("photo", sessionDTO.getPhoto())
+                            .putString("password", password)
                             .apply();
                     Intent intent = new Intent(LoginActivity.this, Home.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else if (response.body() == null) {
                     try {

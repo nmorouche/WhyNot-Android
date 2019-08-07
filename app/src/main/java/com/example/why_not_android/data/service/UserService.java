@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
@@ -20,6 +21,9 @@ public interface UserService {
 
     @GET("users/myAccount")
     Call<UserDTO> myAccount(@Header("x-access-token") String token);
+
+    @PATCH("users/myAccount")
+    Call<RegisterResultDTO> updateAccount(@Header("x-access-token") String token, @Body UserDTO userDTO);
 
     @PATCH("users/viewers")
     Call<RegisterResultDTO> setViewed(@Header("x-access-token") String token, @Query("_id") String id);

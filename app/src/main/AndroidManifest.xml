@@ -36,19 +36,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".views.Home"
-            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".views.Signup3Activity"
-            android:noHistory="true" />
+        <activity android:name=".views.Signup3Activity" />
         <activity android:name=".views.Signup2Activity" />
         <activity android:name=".views.SignupActivity" />
-        <activity
-            android:name=".views.LoginActivity"
-            android:noHistory="true" />
-        <activity
-            android:name=".views.MainActivity"
-            android:noHistory="true">
+        <activity android:name=".views.LoginActivity" />
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
