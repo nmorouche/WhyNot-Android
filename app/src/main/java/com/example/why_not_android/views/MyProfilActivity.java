@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import com.example.why_not_android.data.dto.RegisterResultDTO;
+import com.example.why_not_android.data.dto.SessionDTO;
 import com.example.why_not_android.data.dto.UserDTO;
 import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
@@ -232,33 +233,52 @@ public class MyProfilActivity extends MenuActivity implements NavigationView.OnN
         return true;
     }
 
+    private void updateNavHeader() {
+        View header = navigationView.getHeaderView(0);
+        TextView drawerUsername = (TextView) header.findViewById(R.id.drawer_username);
+        TextView drawerEmail = (TextView) header.findViewById(R.id.drawer_email);
+        ImageView drawerImage = (ImageView) header.findViewById(R.id.drawer_image);
+        drawerUsername.setText(sharedPreferences.getString("username", ""));
+        drawerEmail.setText(sharedPreferences.getString("email", ""));
+        Glide.with(this)
+                .load(sharedPreferences.getString("photo", "")
+                        .replace("localhost", "10.0.2.2"))
+                .into(drawerImage);
+    }
+
     void updateAccount() {
         UserService userService;
         userService = NetworkProvider.getClient().create(UserService.class);
         String token = sharedPreferences.getString("token", "");
         UserDTO userDTO = createUserDTOWithInfo();
 
-        Call<RegisterResultDTO> registerResultDTOCall = userService.updateAccount(token, userDTO);
-        registerResultDTOCall.enqueue(new Callback<RegisterResultDTO>() {
+        Call<SessionDTO> sessionDTOCall = userService.updateAccount(token, userDTO);
+        sessionDTOCall.enqueue(new Callback<SessionDTO>() {
             @Override
-            public void onResponse(Call<RegisterResultDTO> call, Response<RegisterResultDTO> response) {
+            public void onResponse(Call<SessionDTO> call, Response<SessionDTO> response) {
+                SessionDTO sessionDTO = response.body();
                 if (response.isSuccessful()) {
-                    Toast.makeText(MyProfilActivity.this, "ca marche ;)", Toast.LENGTH_SHORT).show();
                     userDTO.setPhoto(actualUserDTO.getPhoto());
                     actualUserDTO = userDTO;
                     sharedPreferences
                             .edit()
+                            .putString("token", sessionDTO.getToken())
                             .putString("password", actualUserDTO.getPassword())
+                            .putString("username", actualUserDTO.getUsername())
+                            .putString("email", actualUserDTO.getEmail())
+                            .putString("photo", actualUserDTO.getPhoto())
                             .apply();
+                    updateNavHeader();
+                    Toast.makeText(MyProfilActivity.this, "Modification effectué avec succès !", Toast.LENGTH_SHORT).show();
                     cancel();
                 } else {
-                    Toast.makeText(MyProfilActivity.this, "error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyProfilActivity.this, "Erreur! Réessayez plus tard", Toast.LENGTH_SHORT).show();
                 }
 
             }
 
             @Override
-            public void onFailure(Call<RegisterResultDTO> call, Throwable t) {
+            public void onFailure(Call<SessionDTO> call, Throwable t) {
                 Toast.makeText(MyProfilActivity.this, "CA MARCHE PAS :(", Toast.LENGTH_SHORT).show();
             }
         });

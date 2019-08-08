@@ -2,7 +2,6 @@ package com.example.why_not_android.views;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,11 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,14 +22,11 @@ import com.example.why_not_android.data.dto.RegisterResultDTO;
 import com.example.why_not_android.data.dto.UserDTO;
 import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,10 +41,10 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
     ImageView imageView;
     @BindView(R.id.activity_home_user_description_tv)
     TextView textView;
-    @BindView(R.id.activity_home_like_button)
-    Button likeButton;
-    @BindView(R.id.activity_home_dislike_button)
-    Button dislikeButton;
+    @BindView(R.id.activity_home_like_image)
+    ImageView likeImage;
+    @BindView(R.id.activity_home_dislike_image)
+    ImageView dislikeImage;
     @BindView(R.id.activity_home_empty_tv)
     TextView emptyTextView;
     @BindView(R.id.toolbar)
@@ -91,15 +83,23 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                 });
     }
 
-    @OnClick(R.id.activity_home_like_button)
-    void like() {
-        setLiked(userDTOList.get(0).get_id());
+    private String getAge(String s) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        int age;
+        int birthdateInt;
+        age = Integer.valueOf(s.split("/")[2]);
+        birthdateInt = Integer.valueOf(formatter.format(date));
+        age = birthdateInt - age;
+        return String.valueOf(age);
     }
 
-    @OnClick(R.id.activity_home_dislike_button)
-    void dislike() {
-        setViewed(userDTOList.get(0).get_id());
-        cleanUserList();
+    private void displayUser(UserDTO userDTO) {
+        textView.setText(String.format("%s  %s\n%s", userDTO.getUsername(), getAge(userDTO.getBirthdate()), userDTO.getBio()));
+        String url = userDTO.getPhoto();
+        Glide.with(Home.this)
+                .load(url.replace("localhost", "10.0.2.2"))
+                .into(imageView);
     }
 
     void getUsers() {
@@ -115,11 +115,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                     if (response.body().size() != 0) {
                         userDTOList = response.body();
                         UserDTO userDTO = userDTOList.get(0);
-                        textView.setText(userDTO.getUsername() + "\n" + userDTO.getPreference());
-                        String url = userDTO.getPhoto();
-                        Log.d("toz", url);
-                        //url = url.replace("localhost", "10.0.2.2");
-                        Glide.with(Home.this).load(url.replace("localhost", "10.0.2.2")).into(imageView);
+                        displayUser(userDTO);
                         displayButtons();
                     } else {
                         emptyUserList();
@@ -152,7 +148,9 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         registerResultDTOCall.enqueue(new Callback<RegisterResultDTO>() {
             @Override
             public void onResponse(Call<RegisterResultDTO> call, Response<RegisterResultDTO> response) {
-
+                if (response.isSuccessful()) {
+                    cleanUserList();
+                }
             }
 
             @Override
@@ -179,10 +177,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                     MatchDTO matchDTO = response.body();
                     if (matchDTO.getMatch()) {
                         ViewDialog matchDialog = new ViewDialog();
-                        matchDialog.showDialog(Home.this, mUsername, mImageURL, userDTOList);
-                    } else {
-                        setViewed(id);
-                        cleanUserList();
+                        matchDialog.showDialog(Home.this, mUsername, mImageURL);
                     }
                 } else {
                     Log.d("CA MARCHE", "CA MARCHE PAS :(");
@@ -199,8 +194,8 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
     private void emptyUserList() {
         imageView.setVisibility(View.INVISIBLE);
         textView.setVisibility(View.INVISIBLE);
-        likeButton.setVisibility(View.INVISIBLE);
-        dislikeButton.setVisibility(View.INVISIBLE);
+        likeImage.setVisibility(View.INVISIBLE);
+        dislikeImage.setVisibility(View.INVISIBLE);
         emptyTextView.setText(getString(R.string.home_activity_no_users_found));
         emptyTextView.setVisibility(View.VISIBLE);
     }
@@ -217,14 +212,14 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
     }
 
     private void hideButtons() {
-        likeButton.setVisibility(View.INVISIBLE);
-        dislikeButton.setVisibility(View.INVISIBLE);
+        likeImage.setVisibility(View.INVISIBLE);
+        dislikeImage.setVisibility(View.INVISIBLE);
         emptyTextView.setVisibility(View.INVISIBLE);
     }
 
     private void displayButtons() {
-        likeButton.setVisibility(View.VISIBLE);
-        dislikeButton.setVisibility(View.VISIBLE);
+        likeImage.setVisibility(View.VISIBLE);
+        dislikeImage.setVisibility(View.VISIBLE);
     }
 
     private void setupToolbar() {
@@ -255,6 +250,17 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         } else {
             super.onBackPressed();
         }
+    }
+
+    @OnClick(R.id.activity_home_like_image)
+    void like() {
+        setLiked(userDTOList.get(0).get_id());
+    }
+
+    @OnClick(R.id.activity_home_dislike_image)
+    void dislike() {
+        setViewed(userDTOList.get(0).get_id());
+        cleanUserList();
     }
 
     @OnClick(R.id.activity_home_iv)

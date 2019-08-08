@@ -28,13 +28,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:foregroundGravity="center_horizontal"
-                android:paddingRight="50dp"
+                android:paddingEnd="50dp"
                 android:src="@drawable/logosansfond" />
         </android.support.v7.widget.Toolbar>
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
@@ -58,33 +56,31 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
+                android:lineSpacingExtra="20dp"
                 android:lines="2"
                 android:textColor="@color/blueCharte"
                 android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@+id/activity_home_iv" />
 
-            <Button
-                android:id="@+id/activity_home_dislike_button"
-                android:layout_width="150dp"
+            <ImageView
+                android:id="@+id/activity_home_dislike_image"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/button_shape_blue"
-                android:text="DISLIKE"
-                android:textColor="@color/redCharte"
-                app:layout_constraintEnd_toStartOf="@+id/activity_home_like_button"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/home_cancel"
+                app:layout_constraintEnd_toStartOf="@+id/activity_home_like_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activity_home_user_description_tv" />
 
-            <Button
-                android:id="@+id/activity_home_like_button"
-                android:layout_width="150dp"
+            <ImageView
+                android:id="@+id/activity_home_like_image"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/button_shape_red"
-                android:text="LIKE"
-                android:textColor="@color/blueCharte"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/home_like"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/activity_home_dislike_button"
+                app:layout_constraintStart_toEndOf="@+id/activity_home_dislike_image"
                 app:layout_constraintTop_toBottomOf="@+id/activity_home_user_description_tv" />
 
             <TextView

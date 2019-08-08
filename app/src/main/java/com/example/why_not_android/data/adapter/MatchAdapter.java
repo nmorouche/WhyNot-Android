@@ -48,12 +48,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         Glide.with(matchViewHolder.itemView).load(user.getPhoto().replace("localhost", "10.0.2.2")).into(matchViewHolder.pictureImv);
 
         if (itemClickListener != null) {
-            matchViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemClickListener.onclick(user);
-                }
-            });
+            matchViewHolder.itemView.setOnClickListener(v -> itemClickListener.onclick(user));
         }
     }
 
@@ -62,15 +57,13 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         return userList != null ? userList.size() : 0;
     }
 
-    public void setItemClickListener(EventAdapter.ItemClickListener itemClickListener) {
-    }
 
     class MatchViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_match_image)
         ImageView pictureImv;
-        @BindView(R.id.item_match_username)
+        @BindView(R.id.item_match_birthdate)
         TextView dateTv;
-        @BindView(R.id.item_match_gender)
+        @BindView(R.id.item_match_username)
         TextView nameTv;
 
         public MatchViewHolder(@NonNull View itemView) {

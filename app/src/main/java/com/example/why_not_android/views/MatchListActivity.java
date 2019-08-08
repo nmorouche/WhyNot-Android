@@ -58,7 +58,7 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         matchAdapter = new MatchAdapter();
         recyclerView.setAdapter(matchAdapter);
-        matchAdapter.setItemClickListener((MatchAdapter.ItemClickListener) user -> {
+        matchAdapter.setItemClickListener(user -> {
             Intent intent = new Intent(MatchListActivity.this, DetailUser.class);
             intent.putExtra("userName", user.getUsername());
             intent.putExtra("userBio", user.getBio());

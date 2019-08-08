@@ -2,6 +2,7 @@ package com.example.why_not_android.data.service;
 
 import com.example.why_not_android.data.dto.MatchDTO;
 import com.example.why_not_android.data.dto.RegisterResultDTO;
+import com.example.why_not_android.data.dto.SessionDTO;
 import com.example.why_not_android.data.dto.UserDTO;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public interface UserService {
     Call<UserDTO> myAccount(@Header("x-access-token") String token);
 
     @PATCH("users/myAccount")
-    Call<RegisterResultDTO> updateAccount(@Header("x-access-token") String token, @Body UserDTO userDTO);
+    Call<SessionDTO> updateAccount(@Header("x-access-token") String token, @Body UserDTO userDTO);
 
     @PATCH("users/viewers")
     Call<RegisterResultDTO> setViewed(@Header("x-access-token") String token, @Query("_id") String id);

@@ -2,17 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/drawer_menu_home"
-            android:icon="@drawable/ic_home"
-            android:title="Accueil" />
-        <item
-            android:id="@+id/drawer_menu_match"
-            android:icon="@drawable/matchlogo"
-            android:title="Match" />
-    </group>
+    <item android:title="Social">
+        <menu>
+            <item
+                android:id="@+id/drawer_menu_home"
+                android:icon="@drawable/ic_home"
+                android:title="Accueil" />
+            <item
+                android:id="@+id/drawer_menu_match"
+                android:icon="@drawable/matchlogo"
+                android:title="Match" />
+            <item
+                android:id="@+id/drawer_menu_messages"
+                android:icon="@drawable/ic_message_black_24dp"
+                android:title="Messages" />
+        </menu>
+    </item>
 
     <item android:title="Événements">
         <menu>
