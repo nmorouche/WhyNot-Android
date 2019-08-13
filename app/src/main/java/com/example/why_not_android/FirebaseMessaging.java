@@ -1,4 +1,5 @@
 package com.example.why_not_android;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -34,12 +35,12 @@ import com.google.firebase.messaging.RemoteMessage;
 /**
  * NOTE: There can only be one service in each app that receives FCM messages. If multiple
  * are declared in the Manifest then the first one will be chosen.
- *
+ * <p>
  * In order to make this Java sample functional, you must remove the following from the Kotlin messaging
  * service in the AndroidManifest.xml:
- *
+ * <p>
  * <intent-filter>
- *   <action android:name="com.google.firebase.MESSAGING_EVENT" />
+ * <action android:name="com.google.firebase.MESSAGING_EVENT" />
  * </intent-filter>
  */
 public class FirebaseMessaging extends FirebaseMessagingService {
@@ -134,7 +135,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
 
     /**
      * Persist token to third-party servers.
-     *
+     * <p>
      * Modify this method to associate the user's FCM InstanceID token with any server-side account
      * maintained by your application.
      *

@@ -2,8 +2,12 @@ package com.example.why_not_android.views;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.service.autofill.FieldClassification;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -19,7 +23,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ViewDialog {
+public class ViewDialog extends AppCompatActivity {
 
     public void showDialog(Activity activity, String username, String image) {
         final Dialog dialog = new Dialog(activity);
@@ -32,7 +36,9 @@ public class ViewDialog {
         matchWithUsername.setText(String.format("%s%s%s", activity.getString(R.string.custom_dialog_message), "\n", username));
         String url = image.replace("localhost", "10.0.2.2");
         Glide.with(activity).load(url).into(userImage);
-        dialogDismiss.setOnClickListener(v -> dialog.dismiss());
+        dialogDismiss.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
         dialog.show();
     }
 }

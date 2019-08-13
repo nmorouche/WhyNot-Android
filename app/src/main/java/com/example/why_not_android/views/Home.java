@@ -75,10 +75,8 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                         Log.w(TAG, "getInstanceId failed", task.getException());
                         return;
                     }
-
                     // Get new Instance ID token
                     String token = task.getResult().getToken();
-
                     Log.d(TAG, token);
                 });
     }
