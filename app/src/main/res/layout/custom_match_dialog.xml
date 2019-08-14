@@ -28,37 +28,16 @@
         android:textColor="@color/redCharte"
         android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/custom_match_dialog_button_dismiss"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/button_shape_red"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="FERMER"
-            android:textColor="@color/blueCharte"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/custom_match_dialog_button_match"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@drawable/button_shape_red"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="MATCH"
-            android:textColor="@color/blueCharte"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/custom_match_dialog_button_dismiss"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_shape_red"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="FERMER"
+        android:textColor="@color/blueCharte"
+        android:textStyle="bold" />
 
 </LinearLayout>

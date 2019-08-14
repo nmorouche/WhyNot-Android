@@ -16,6 +16,7 @@ import com.example.why_not_android.data.SharedPreferences.SharedPref;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,20 +57,23 @@ public class DetailUser extends AppCompatActivity {
         int day;
         int month;
         int birthdateInt;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        int actualMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        int actualDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy", Locale.FRANCE);
         Date date = new Date();
         birthdateInt = Integer.valueOf(formatter.format(date));
-        String splitted[] = s.split("/");
+        String[] splitted = s.split("/");
         day = Integer.valueOf(splitted[0]);
         month = Integer.valueOf(splitted[1]);
         age = Integer.valueOf(splitted[2]);
-        if (day < Calendar.getInstance().get(Calendar.DAY_OF_MONTH) && month <= (Calendar.getInstance().get(Calendar.MONTH) + 1)) {
-            age += 1;
+        if (month >= actualMonth) {
+            if (day >= actualDay) {
+                age += 1;
+            }
         }
         birthdateInt -= age;
         return String.valueOf(birthdateInt);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
