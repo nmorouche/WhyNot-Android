@@ -26,6 +26,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -82,18 +83,27 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
     }
 
     private String getAge(String s) {
+        int age;
+        int day;
+        int month;
+        int birthdateInt;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
         Date date = new Date();
-        int age;
-        int birthdateInt;
-        age = Integer.valueOf(s.split("/")[2]);
         birthdateInt = Integer.valueOf(formatter.format(date));
-        age = birthdateInt - age;
-        return String.valueOf(age);
+        String splitted[] = s.split("/");
+        day = Integer.valueOf(splitted[0]);
+        month = Integer.valueOf(splitted[1]);
+        age = Integer.valueOf(splitted[2]);
+        if (!(day <= Calendar.getInstance().get(Calendar.DAY_OF_MONTH) && month <= (Calendar.getInstance().get(Calendar.MONTH) + 1))) {
+            age += 1;
+        }
+        birthdateInt -= age;
+        return String.valueOf(birthdateInt);
     }
 
     private void displayUser(UserDTO userDTO) {
-        textView.setText(String.format("%s  %s\n%s", userDTO.getUsername(), getAge(userDTO.getBirthdate()), userDTO.getBio()));
+        textView.setText(String.format("%s  %s\n%s", userDTO.getUsername(),
+                getAge(userDTO.getBirthdate()), userDTO.getBio()));
         String url = userDTO.getPhoto();
         Glide.with(Home.this)
                 .load(url.replace("localhost", "10.0.2.2"))

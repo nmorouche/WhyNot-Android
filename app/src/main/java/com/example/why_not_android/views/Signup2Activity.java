@@ -23,8 +23,10 @@ import com.example.why_not_android.data.MyPermissions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -34,7 +36,7 @@ import butterknife.OnClick;
 public class Signup2Activity extends AppCompatActivity {
 
     private int EXTERNAL_STORAGE_PERMISSION = 1;
-    private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
+    private final int PICK_IMAGE_GALLERY = 2;
 
     private DatePickerDialog datePickerDialog;
     @BindView(R.id.signup2Birthdate)
@@ -58,6 +60,7 @@ public class Signup2Activity extends AppCompatActivity {
         ButterKnife.bind(this);
         initDatePicker();
         myPermissions = MyPermissions.getInstance(this);
+        ;
         genderGr.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.radioButtonHomme) {
                 gender = 0;
@@ -69,27 +72,30 @@ public class Signup2Activity extends AppCompatActivity {
 
     private void initDatePicker() {
         Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
+        int year = calendar.get(Calendar.YEAR) - 14;
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-
+        String format = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format, Locale.FRANCE);
         datePickerDialog = new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
-            String format = "dd/MM/yyyy";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format, Locale.FRANCE);
-
             calendar.set(Calendar.YEAR, year1);
             calendar.set(Calendar.MONTH, month1);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
             birthdateEdt.setText(simpleDateFormat.format(calendar.getTime()));
         }, year, month, day);
-    }
-
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
+        try {
+            int yearInt = Calendar.getInstance().get(Calendar.YEAR);
+            String maxDateString = "31/12/" + (yearInt - 14);
+            String minDateString = "01/01/1960";
+            Date maxDate = simpleDateFormat.parse(maxDateString);
+            Date minDate = simpleDateFormat.parse(minDateString);
+            long maxDateLong = maxDate.getTime();
+            long minDateLong = minDate.getTime();
+            datePickerDialog.getDatePicker().setMaxDate(maxDateLong);
+            datePickerDialog.getDatePicker().setMinDate(minDateLong);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getRealPathFromURI(Uri contentUri) {
@@ -104,7 +110,7 @@ public class Signup2Activity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_GALLERY) {
-            if(resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
                 Uri selectedImage = data.getData();
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);

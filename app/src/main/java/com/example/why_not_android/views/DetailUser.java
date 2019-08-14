@@ -13,6 +13,10 @@ import com.bumptech.glide.Glide;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -42,10 +46,30 @@ public class DetailUser extends AppCompatActivity {
         id = extras.getString("userid");
         biotv.setText(bio);
         birthdatetv.setText(birth);
-        nametv.setText(name);
+        nametv.setText(String.format("%s %s", name, getAge(birth)));
         Glide.with(DetailUser.this).load(image.replace("localhost", "10.0.2.2")).into(imageView);
 
     }
+
+    private String getAge(String s) {
+        int age;
+        int day;
+        int month;
+        int birthdateInt;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        birthdateInt = Integer.valueOf(formatter.format(date));
+        String splitted[] = s.split("/");
+        day = Integer.valueOf(splitted[0]);
+        month = Integer.valueOf(splitted[1]);
+        age = Integer.valueOf(splitted[2]);
+        if (day < Calendar.getInstance().get(Calendar.DAY_OF_MONTH) && month <= (Calendar.getInstance().get(Calendar.MONTH) + 1)) {
+            age += 1;
+        }
+        birthdateInt -= age;
+        return String.valueOf(birthdateInt);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

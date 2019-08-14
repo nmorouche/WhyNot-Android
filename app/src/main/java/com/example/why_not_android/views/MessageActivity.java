@@ -23,7 +23,7 @@ import com.scaledrone.lib.SubscribeOptions;
 
 import java.util.Random;
 
-public class MessageActivity extends AppCompatActivity implements RoomListener {
+public class MessageActivity extends AppCompatActivity {
 
     private String channelID = "3pmgszkbyzy483lR";
     private String roomName = "observable-room";
@@ -116,20 +116,6 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
             scaledrone.publish(roomName, message);
             editText.getText().clear();
         }
-    }
-
-    @Override
-    public void onOpen(Room room) {
-        System.out.println("Conneted to room");
-    }
-
-    @Override
-    public void onOpenFailure(Room room, Exception ex) {
-        System.err.println(ex);
-    }
-
-    @Override
-    public void onMessage(Room room, com.scaledrone.lib.Message receivedMessage) {
     }
 
     private String getRandomColor() {
