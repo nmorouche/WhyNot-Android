@@ -17,18 +17,23 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
+import com.example.why_not_android.data.dto.FirebaseDTO;
 import com.example.why_not_android.data.dto.MatchDTO;
 import com.example.why_not_android.data.dto.RegisterResultDTO;
 import com.example.why_not_android.data.dto.UserDTO;
+import com.example.why_not_android.data.service.FirebaseService;
 import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,6 +84,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                     }
                     // Get new Instance ID token
                     String token = task.getResult().getToken();
+                    registrateFirebaseTokenToDatabase(token);
                     Log.d(TAG, token);
                 });
     }
@@ -115,7 +121,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                 .into(imageView);
     }
 
-    void getUsers() {
+    private void getUsers() {
         UserService userService;
         userService = NetworkProvider.getClient().create(UserService.class);
         String token = sharedPreferences.getString("token", "");
@@ -152,7 +158,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
 
     }
 
-    void setViewed(String id) {
+    private void setViewed(String id) {
         UserService userService;
         userService = NetworkProvider.getClient().create(UserService.class);
         String token = sharedPreferences.getString("token", "");
@@ -173,7 +179,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         });
     }
 
-    void setLiked(String id) {
+    private void setLiked(String id) {
         String mUsername = userDTOList.get(0).getUsername();
         String mImageURL = userDTOList.get(0).getPhoto();
         setViewed(id);
@@ -254,6 +260,31 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         Glide.with(Home.this).load(image.replace("localhost", "10.0.2.2")).into(drawerImageView);
         drawerEmail.setText(sharedPreferences.getString("email", ""));
         drawerUsername.setText(sharedPreferences.getString("username", ""));
+    }
+
+    private void registrateFirebaseTokenToDatabase(String firebaseToken) {
+        FirebaseService firebaseService;
+        firebaseService = NetworkProvider.getClient().create(FirebaseService.class);
+        String token = sharedPreferences.getString("token", "");
+        FirebaseDTO firebaseDTO = new FirebaseDTO(firebaseToken);
+
+
+        Call<RegisterResultDTO> registerResultDTOCall = firebaseService.registration(token, firebaseDTO);
+        registerResultDTOCall.enqueue(new Callback<RegisterResultDTO>() {
+            @Override
+            public void onResponse(Call<RegisterResultDTO> call, Response<RegisterResultDTO> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(Home.this, "yes ;-)", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Home.this, "yes but no ;-(", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResultDTO> call, Throwable t) {
+                Toast.makeText(Home.this, "no :-(", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

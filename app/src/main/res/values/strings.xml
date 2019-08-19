@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">WhyNot</string>
+    <string name="firebaseID">AAAA8K6g49g:APA91bGHaaI_zphN6lm_sqVkUVtx5xG4iYvCLwGiM-bboH5xkluU3pUUF3a7V3CWfbtPuD4gau0Lh_xuIAaC_w-tmA_cquuAii7CWc6Iwc7x3h8Y2-RSY4of0uAV15Tj3OAcvKp4rtcB</string>
     <string name="signup">Signup</string>
     <string name="login">Login</string>
     <string name="adresse_mail">Adresse mail</string>
@@ -28,4 +29,6 @@
     <string name="activity_my_profil_edit_password_edit_text">Password</string>
     <string name="activity_my_profil_preferences">Préférences</string>
     <string name="activity_my_profil_bio">Bio</string>
+    <string name="activity_message_send_firebase_notification_title">Psssssst</string>
+    <string name="activity_message_send_firebase_notification_body">Tu as reçu un nouveau message !</string>
 </resources>

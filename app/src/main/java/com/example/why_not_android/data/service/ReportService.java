@@ -1,5 +1,7 @@
 package com.example.why_not_android.data.service;
 
+import com.example.why_not_android.data.dto.FBMNotificationDTO;
+import com.example.why_not_android.data.dto.FBMPushNotificationDTO;
 import com.example.why_not_android.data.dto.ReportDTO;
 
 import retrofit2.Call;

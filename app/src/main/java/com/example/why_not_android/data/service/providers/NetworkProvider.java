@@ -43,7 +43,7 @@ public class NetworkProvider {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(prodBaseUrl)
+                    .baseUrl(localBaseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -51,7 +51,7 @@ public class NetworkProvider {
     }
 
     private NetworkProvider() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(prodBaseUrl)
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(localBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         eventService = retrofit.create(EventService.class);
