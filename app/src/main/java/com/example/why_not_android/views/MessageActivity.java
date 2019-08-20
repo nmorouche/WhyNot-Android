@@ -43,29 +43,20 @@ public class MessageActivity extends AppCompatActivity {
     private MessageAdapter messageAdapter;
     private ListView messagesView;
     private SharedPreferences sharedPreferences;
-    private User user = new User();
+    public static User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         sharedPreferences = SharedPref.getInstance(this);
+        setUserInformations();
         editText = (EditText) findViewById(R.id.editText);
-
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.list_messages);
         messagesView.setAdapter(messageAdapter);
-
-        MemberData data = new MemberData(sharedPreferences.getString("username", ""), getRandomColor());
-        Bundle extras = getIntent().getExtras();
-        user.set_id(extras.getString("userid"));
-        user.setUsername(extras.getString("userName"));
-        user.setBirthdate(extras.getString("userBirth"));
-        user.setPhoto(extras.getString("userPic"));
-        user.setBio(extras.getString("userBio"));
-
-        Log.d("toz", user.toString());
-
+        MemberData data = new MemberData(sharedPreferences.getString("username", ""), user.getPhoto());
+        Log.d("messageDATA", data.toString());
         scaledrone = new Scaledrone(channelID, data);
         scaledrone.connect(new Listener() {
             @Override
@@ -75,18 +66,7 @@ public class MessageActivity extends AppCompatActivity {
                     @Override
                     public void onOpen(Room room) {
                         room.listenToHistoryEvents((room1, receivedMessage) -> {
-                            final ObjectMapper mapper = new ObjectMapper();
-                            try {
-                                final MemberData data = mapper.treeToValue(receivedMessage.getMember().getClientData(), MemberData.class);
-                                boolean belongsToCurrentUser = receivedMessage.getClientID().equals(scaledrone.getClientID());
-                                final Message message1 = new Message(receivedMessage.getData().asText(), data, belongsToCurrentUser);
-                                runOnUiThread(() -> {
-                                    messageAdapter.add(message1);
-                                    messagesView.setSelection(messagesView.getCount() - 1);
-                                });
-                            } catch (JsonProcessingException e) {
-                                e.printStackTrace();
-                            }
+                            Log.d("toz", receivedMessage.getData().asText());
                         });
                     }
 
@@ -97,18 +77,14 @@ public class MessageActivity extends AppCompatActivity {
 
                     @Override
                     public void onMessage(Room room, com.scaledrone.lib.Message message) {
+                        Log.d("toz", message.toString());
                         final ObjectMapper mapper = new ObjectMapper();
-                        try {
-                            final MemberData data = mapper.treeToValue(message.getMember().getClientData(), MemberData.class);
-                            boolean belongsToCurrentUser = message.getClientID().equals(scaledrone.getClientID());
-                            final Message message1 = new Message(message.getData().asText(), data, belongsToCurrentUser);
-                            runOnUiThread(() -> {
-                                messageAdapter.add(message1);
-                                messagesView.setSelection(messagesView.getCount() - 1);
-                            });
-                        } catch (JsonProcessingException e) {
-                            e.printStackTrace();
-                        }
+                        boolean belongsToCurrentUser = message.getClientID().equals(scaledrone.getClientID());
+                        final Message message1 = new Message(message.getData().asText(), belongsToCurrentUser);
+                        runOnUiThread(() -> {
+                            messageAdapter.add(message1);
+                            messagesView.setSelection(messagesView.getCount() - 1);
+                        });
                     }
                 }, new SubscribeOptions(50));
             }
@@ -173,12 +149,12 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
-    private String getRandomColor() {
-        Random r = new Random();
-        StringBuffer sb = new StringBuffer("#");
-        while (sb.length() < 7) {
-            sb.append(Integer.toHexString(r.nextInt()));
-        }
-        return sb.toString().substring(0, 7);
+    private void setUserInformations() {
+        Bundle extras = getIntent().getExtras();
+        user.set_id(extras.getString("userid"));
+        user.setUsername(extras.getString("userName"));
+        user.setBirthdate(extras.getString("userBirth"));
+        user.setPhoto(extras.getString("userPic"));
+        user.setBio(extras.getString("userBio"));
     }
 }

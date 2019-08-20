@@ -8,13 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.Models.Message;
+import com.example.why_not_android.views.MessageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MessageAdapter extends BaseAdapter {
@@ -60,22 +65,21 @@ public class MessageAdapter extends BaseAdapter {
             holder.messageBody.setText(message.getText());
         } else {
             convertView = messageInflater.inflate(R.layout.their_message, null);
-            holder.avatar = (View) convertView.findViewById(R.id.avatar);
+            holder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
-            holder.name.setText(message.getMemberData().getName());
+            holder.name.setText(MessageActivity.user.getUsername());
             holder.messageBody.setText(message.getText());
-            GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
-            drawable.setColor(Color.parseColor(message.getMemberData().getColor()));
+            Glide.with(convertView).load(MessageActivity.user.getPhoto().replace("localhost", "10.0.2.2")).dontAnimate().into(holder.avatar);
         }
 
         return convertView;
     }
 
     class MessageViewHolder {
-        public View avatar;
+        public ImageView avatar;
         public TextView name;
         public TextView messageBody;
     }

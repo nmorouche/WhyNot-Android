@@ -2,11 +2,11 @@ package com.example.why_not_android.data.Models;
 
 public class MemberData {
     private String name;
-    private String color;
+    private String image;
 
-    public MemberData(String name, String color) {
+    public MemberData(String name, String image) {
         this.name = name;
-        this.color = color;
+        this.image = image;
     }
 
     public MemberData() {
@@ -16,15 +16,15 @@ public class MemberData {
         return name;
     }
 
-    public String getColor() {
-        return color;
+    public String getImage() {
+        return image;
     }
 
     @Override
     public String toString() {
         return "MemberData{" +
                 "name='" + name + '\'' +
-                ", color='" + color + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }
