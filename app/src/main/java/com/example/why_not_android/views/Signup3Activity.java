@@ -54,8 +54,6 @@ public class Signup3Activity extends AppCompatActivity {
                 preferences = 0;
             } else if (checkedId == R.id.signup3radioButtonFemme) {
                 preferences = 1;
-            } else {
-                preferences = 2;
             }
         });
     }
@@ -117,6 +115,10 @@ public class Signup3Activity extends AppCompatActivity {
                     Log.d("toz", sessionDTO.getEmail());
                     sharedPreferences.edit()
                             .putString("token", sessionDTO.getToken())
+                            .putString("email", sessionDTO.getEmail())
+                            .putString("username", sessionDTO.getUsername())
+                            .putString("photo", sessionDTO.getPhoto())
+                            .putString("password", Signup.getClient().getPassword())
                             .apply();
                     Intent intent = new Intent(Signup3Activity.this, Home.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

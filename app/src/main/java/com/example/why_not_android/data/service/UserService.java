@@ -2,6 +2,7 @@ package com.example.why_not_android.data.service;
 
 import com.example.why_not_android.data.dto.MatchDTO;
 import com.example.why_not_android.data.dto.RegisterResultDTO;
+import com.example.why_not_android.data.dto.RoomNameDTO;
 import com.example.why_not_android.data.dto.SessionDTO;
 import com.example.why_not_android.data.dto.UserDTO;
 
@@ -34,4 +35,7 @@ public interface UserService {
 
     @GET("users/match")
     Call<List<UserDTO>> getMatch(@Header("x-access-token") String token);
+
+    @GET("users/match/roomName/")
+    Call<RoomNameDTO> getRoomName(@Header("x-access-token") String token, @Query("_id") String _id);
 }

@@ -36,8 +36,8 @@ import retrofit2.Response;
 
 public class MessageActivity extends AppCompatActivity {
 
-    private String channelID = "3pmgszkbyzy483lR";
-    private String roomName = "observable-room";
+    private final String channelID = "3pmgszkbyzy483lR";
+    private String roomName;
     private EditText editText;
     private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
@@ -50,13 +50,13 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         sharedPreferences = SharedPref.getInstance(this);
+        roomName = getIntent().getExtras().getString("roomName", "");
         setUserInformations();
         editText = (EditText) findViewById(R.id.editText);
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.list_messages);
         messagesView.setAdapter(messageAdapter);
         MemberData data = new MemberData(sharedPreferences.getString("username", ""), user.getPhoto());
-        Log.d("messageDATA", data.toString());
         scaledrone = new Scaledrone(channelID, data);
         scaledrone.connect(new Listener() {
             @Override
@@ -66,7 +66,7 @@ public class MessageActivity extends AppCompatActivity {
                     @Override
                     public void onOpen(Room room) {
                         room.listenToHistoryEvents((room1, receivedMessage) -> {
-                            Log.d("toz", receivedMessage.getData().asText());
+                            Log.d("toz", receivedMessage.toString());
                         });
                     }
 
@@ -78,7 +78,6 @@ public class MessageActivity extends AppCompatActivity {
                     @Override
                     public void onMessage(Room room, com.scaledrone.lib.Message message) {
                         Log.d("toz", message.toString());
-                        final ObjectMapper mapper = new ObjectMapper();
                         boolean belongsToCurrentUser = message.getClientID().equals(scaledrone.getClientID());
                         final Message message1 = new Message(message.getData().asText(), belongsToCurrentUser);
                         runOnUiThread(() -> {

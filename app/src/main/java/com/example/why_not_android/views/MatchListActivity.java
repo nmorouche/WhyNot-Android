@@ -13,21 +13,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.why_not_android.R;
-import com.example.why_not_android.data.Models.Event;
 import com.example.why_not_android.data.Models.User;
 import com.example.why_not_android.data.SharedPreferences.SharedPref;
-import com.example.why_not_android.data.adapter.EventAdapter;
 import com.example.why_not_android.data.adapter.MatchAdapter;
+import com.example.why_not_android.data.dto.RoomNameDTO;
+import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MatchListActivity extends MenuActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -59,14 +61,37 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
         matchAdapter = new MatchAdapter();
         recyclerView.setAdapter(matchAdapter);
         matchAdapter.setItemClickListener(user -> {
-            //Intent intent = new Intent(MatchListActivity.this, DetailUser.class);
-            Intent intent = new Intent(MatchListActivity.this, MessageActivity.class);
-            intent.putExtra("userName", user.getUsername());
-            intent.putExtra("userBio", user.getBio());
-            intent.putExtra("userBirth", user.getBirthdate());
-            intent.putExtra("userPic", user.getPhoto());
-            intent.putExtra("userid", user.get_id());
-            startActivity(intent);
+            UserService userService;
+            userService = NetworkProvider.getClient().create(UserService.class);
+            String token = sharedPreferences.getString("token", "");
+
+            Call<RoomNameDTO> roomNameDTOCall = userService.getRoomName(token, user.get_id());
+            roomNameDTOCall.enqueue(new Callback<RoomNameDTO>() {
+                @Override
+                public void onResponse(Call<RoomNameDTO> call, Response<RoomNameDTO> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("toz", "yes");
+                        RoomNameDTO roomNameDTO = response.body();
+                        //Intent intent = new Intent(MatchListActivity.this, DetailUser.class);
+                        Intent intent = new Intent(MatchListActivity.this, MessageActivity.class);
+                        intent.putExtra("userName", user.getUsername());
+                        intent.putExtra("userBio", user.getBio());
+                        intent.putExtra("userBirth", user.getBirthdate());
+                        intent.putExtra("userPic", user.getPhoto());
+                        intent.putExtra("userid", user.get_id());
+                        intent.putExtra("roomName", roomNameDTO.getRoomName());
+                        Log.d("toz", roomNameDTO.getRoomName());
+                        startActivity(intent);
+                    } else {
+                        Log.d("toz", "hell na");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RoomNameDTO> call, Throwable t) {
+
+                }
+            });
         });
     }
 
@@ -92,8 +117,7 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
     }
 
     private void loadData() {
-        Intent i = getIntent();
-        Bundle bundle = i.getExtras();
+        Bundle bundle = getIntent().getExtras();
         NetworkProvider.getInstance().getMatch(new NetworkProvider.Listener<List<User>>() {
             @Override
             public void onSuccess(List<User> data) {

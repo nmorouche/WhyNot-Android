@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,15 +26,12 @@ import com.example.why_not_android.data.service.FirebaseService;
 import com.example.why_not_android.data.service.UserService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -140,13 +138,9 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                         emptyUserList();
                     }
                 } else {
-                    try {
-                        //Return to MainActivity if the user is no longer connected.
-                        Intent intent = new Intent(Home.this, LoginActivity.class);
-                        startActivity(intent);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    //Return to MainActivity if the user is no longer connected.
+                    Intent intent = new Intent(Home.this, MainActivity.class);
+                    startActivity(intent);
                 }
             }
 
@@ -268,23 +262,30 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         String token = sharedPreferences.getString("token", "");
         FirebaseDTO firebaseDTO = new FirebaseDTO(firebaseToken);
 
-
         Call<RegisterResultDTO> registerResultDTOCall = firebaseService.registration(token, firebaseDTO);
         registerResultDTOCall.enqueue(new Callback<RegisterResultDTO>() {
             @Override
             public void onResponse(Call<RegisterResultDTO> call, Response<RegisterResultDTO> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(Home.this, "yes ;-)", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Home.this, "yes but no ;-(", Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override
             public void onFailure(Call<RegisterResultDTO> call, Throwable t) {
-                Toast.makeText(Home.this, "no :-(", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void exitAlert() {
+        new AlertDialog.Builder(this)
+                .setTitle("Quittez")
+                .setMessage("Voulez-vous quitter l'application ?")
+                .setPositiveButton("Oui", (dialog, which) -> finish())
+                .setNegativeButton("Déconnexion et quitter", ((dialog, which) -> {
+                    sharedPreferences.edit().clear().apply();
+                    finishAffinity();
+                }))
+                .setNeutralButton("Annuler", null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     @Override
@@ -292,7 +293,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            exitAlert();
         }
     }
 

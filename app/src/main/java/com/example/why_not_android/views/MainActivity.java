@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPreferences = SharedPref.getInstance(this);
+        if (!sharedPreferences.getString("token", "").equals("")) {
+            Intent intent = new Intent(MainActivity.this, Home.class);
+            startActivity(intent);
+        }
         Button signupbtn = findViewById(R.id.button2);
         signupbtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignupActivity.class);
