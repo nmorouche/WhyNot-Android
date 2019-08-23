@@ -14,7 +14,6 @@
     <string name="homme">Homme</string>
     <string name="femme">Femme</string>
     <string name="gender">Sexe</string>
-    <string name="les_deux">Les deux</string>
     <string name="pr_ference">Préference</string>
     <string name="biographie">Biographie</string>
     <string name="LoginActivity_password_hint">Mot de passe</string>
@@ -29,6 +28,6 @@
     <string name="activity_my_profil_edit_password_edit_text">Password</string>
     <string name="activity_my_profil_preferences">Préférences</string>
     <string name="activity_my_profil_bio">Bio</string>
-    <string name="activity_message_send_firebase_notification_title">Psssssst</string>
-    <string name="activity_message_send_firebase_notification_body">Tu as reçu un nouveau message !</string>
+    <string name="activity_message_send_firebase_notification_title">Psssssst !</string>
+    <string name="activity_message_send_firebase_notification_body">Tu as reçu un nouveau message</string>
 </resources>

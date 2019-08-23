@@ -112,7 +112,6 @@ public class Signup3Activity extends AppCompatActivity {
                                    Response<SessionDTO> response) {
                 if (response.isSuccessful()) {
                     SessionDTO sessionDTO = response.body();
-                    Log.d("toz", sessionDTO.getEmail());
                     sharedPreferences.edit()
                             .putString("token", sessionDTO.getToken())
                             .putString("email", sessionDTO.getEmail())
@@ -136,7 +135,6 @@ public class Signup3Activity extends AppCompatActivity {
             }
         });
     }
-
 
     @OnClick(R.id.signup2Button)
     void submit() {

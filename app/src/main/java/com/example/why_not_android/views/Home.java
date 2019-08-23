@@ -282,6 +282,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                 .setNegativeButton("Déconnexion et quitter", ((dialog, which) -> {
                     sharedPreferences.edit().clear().apply();
                     finishAffinity();
+                    System.exit(0);
                 }))
                 .setNeutralButton("Annuler", null)
                 .setIcon(android.R.drawable.ic_dialog_alert)

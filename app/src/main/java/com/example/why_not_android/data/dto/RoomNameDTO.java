@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 public class RoomNameDTO {
     @SerializedName("roomName")
     String roomName;
+    @SerializedName("myID")
+    String myID;
 
     public String getRoomName() {
         return roomName;
@@ -12,6 +14,14 @@ public class RoomNameDTO {
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
+    }
+
+    public String getMyID() {
+        return myID;
+    }
+
+    public void setMyID(String myID) {
+        this.myID = myID;
     }
 
     @Override

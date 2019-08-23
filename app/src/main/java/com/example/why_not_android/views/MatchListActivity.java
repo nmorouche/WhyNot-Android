@@ -70,7 +70,6 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
                 @Override
                 public void onResponse(Call<RoomNameDTO> call, Response<RoomNameDTO> response) {
                     if (response.isSuccessful()) {
-                        Log.d("toz", "yes");
                         RoomNameDTO roomNameDTO = response.body();
                         //Intent intent = new Intent(MatchListActivity.this, DetailUser.class);
                         Intent intent = new Intent(MatchListActivity.this, MessageActivity.class);
@@ -79,11 +78,11 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
                         intent.putExtra("userBirth", user.getBirthdate());
                         intent.putExtra("userPic", user.getPhoto());
                         intent.putExtra("userid", user.get_id());
+                        intent.putExtra("myID", roomNameDTO.getMyID());
                         intent.putExtra("roomName", roomNameDTO.getRoomName());
-                        Log.d("toz", roomNameDTO.getRoomName());
                         startActivity(intent);
                     } else {
-                        Log.d("toz", "hell na");
+                        backToHome();
                     }
                 }
 
@@ -117,14 +116,11 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
     }
 
     private void loadData() {
-        Bundle bundle = getIntent().getExtras();
         NetworkProvider.getInstance().getMatch(new NetworkProvider.Listener<List<User>>() {
             @Override
             public void onSuccess(List<User> data) {
                 if (data.size() > 0) {
                     matchAdapter.setEventList(data);
-                } else {
-
                 }
             }
 
@@ -133,5 +129,10 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
 
             }
         });
+    }
+
+    private void backToHome() {
+        sharedPreferences.edit().clear().apply();
+        startActivity(new Intent(this, Home.class));
     }
 }

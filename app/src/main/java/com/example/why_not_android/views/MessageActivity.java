@@ -22,6 +22,7 @@ import com.example.why_not_android.data.service.providers.NetworkProvider;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scaledrone.lib.Listener;
+import com.scaledrone.lib.Member;
 import com.scaledrone.lib.Room;
 import com.scaledrone.lib.RoomListener;
 import com.scaledrone.lib.Scaledrone;
@@ -56,17 +57,28 @@ public class MessageActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.list_messages);
         messagesView.setAdapter(messageAdapter);
-        MemberData data = new MemberData(sharedPreferences.getString("username", ""), user.getPhoto());
+        MemberData data = new MemberData(sharedPreferences.getString("myID", ""), sharedPreferences.getString("username", ""), user.getPhoto());
         scaledrone = new Scaledrone(channelID, data);
         scaledrone.connect(new Listener() {
             @Override
             public void onOpen() {
-                System.out.println("Scaledrone connection open");
                 scaledrone.subscribe(roomName, new RoomListener() {
                     @Override
                     public void onOpen(Room room) {
                         room.listenToHistoryEvents((room1, receivedMessage) -> {
                             Log.d("toz", receivedMessage.toString());
+                            ObjectMapper mapper = new ObjectMapper();
+                            try {
+                                final MemberData data = mapper.treeToValue(receivedMessage.getMember().getClientData(), MemberData.class);
+                                boolean belongsToCurrentUser = data.get_id().equals(sharedPreferences.getString("myID", ""));
+                                final Message message1 = new Message(receivedMessage.getData().asText(), belongsToCurrentUser);
+                                runOnUiThread(() -> {
+                                    messageAdapter.add(message1);
+                                    messagesView.setSelection(messagesView.getCount() - 1);
+                                });
+                            } catch (Exception e) {
+
+                            }
                         });
                     }
 
@@ -77,7 +89,13 @@ public class MessageActivity extends AppCompatActivity {
 
                     @Override
                     public void onMessage(Room room, com.scaledrone.lib.Message message) {
-                        Log.d("toz", message.toString());
+                        ObjectMapper mapper = new ObjectMapper();
+                        try {
+                            final MemberData data = mapper.treeToValue(message.getMember().getClientData(), MemberData.class);
+                            Log.d("tozmessage", data.toString());
+                        } catch (Exception e) {
+
+                        }
                         boolean belongsToCurrentUser = message.getClientID().equals(scaledrone.getClientID());
                         final Message message1 = new Message(message.getData().asText(), belongsToCurrentUser);
                         runOnUiThread(() -> {
@@ -129,12 +147,10 @@ public class MessageActivity extends AppCompatActivity {
                     responseCall.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
                         }
 
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
-
                         }
                     });
                 }
@@ -145,7 +161,6 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void setUserInformations() {
