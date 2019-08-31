@@ -1,27 +1,28 @@
 package com.example.why_not_android;
 
-import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.why_not_android.views.Home;
+import com.example.why_not_android.data.SharedPreferences.SharedPref;
+import com.example.why_not_android.data.dto.FirebaseDTO;
+import com.example.why_not_android.data.dto.RegisterResultDTO;
+import com.example.why_not_android.data.service.FirebaseService;
+import com.example.why_not_android.data.service.providers.NetworkProvider;
 import com.example.why_not_android.views.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FirebaseMessaging extends FirebaseMessagingService {
 
@@ -65,8 +66,27 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
-        sendRegistrationToServer(token);
+        registrateFirebaseTokenToDatabase(token);
     }
+
+    private void registrateFirebaseTokenToDatabase(String firebaseToken) {
+        FirebaseService firebaseService;
+        firebaseService = NetworkProvider.getClient().create(FirebaseService.class);
+        String token = SharedPref.getToken();
+        FirebaseDTO firebaseDTO = new FirebaseDTO(firebaseToken);
+
+        Call<RegisterResultDTO> registerResultDTOCall = firebaseService.registration(token, firebaseDTO);
+        registerResultDTOCall.enqueue(new Callback<RegisterResultDTO>() {
+            @Override
+            public void onResponse(Call<RegisterResultDTO> call, Response<RegisterResultDTO> response) {
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResultDTO> call, Throwable t) {
+            }
+        });
+    }
+
     // [END on_new_token]
 
     /**

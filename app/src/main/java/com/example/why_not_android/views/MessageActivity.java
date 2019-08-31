@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.why_not_android.R;
 import com.example.why_not_android.data.Models.MemberData;
@@ -17,6 +18,8 @@ import com.example.why_not_android.data.adapter.MessageAdapter;
 import com.example.why_not_android.data.dto.FBMNotificationDTO;
 import com.example.why_not_android.data.dto.FBMPushNotificationDTO;
 import com.example.why_not_android.data.dto.FirebaseTokenDTO;
+import com.example.why_not_android.data.dto.MessageDTO;
+import com.example.why_not_android.data.service.ChatService;
 import com.example.why_not_android.data.service.FirebaseService;
 import com.example.why_not_android.data.service.providers.NetworkProvider;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,6 +31,7 @@ import com.scaledrone.lib.RoomListener;
 import com.scaledrone.lib.Scaledrone;
 import com.scaledrone.lib.SubscribeOptions;
 
+import java.util.List;
 import java.util.Random;
 
 import okhttp3.ResponseBody;
@@ -57,7 +61,8 @@ public class MessageActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.list_messages);
         messagesView.setAdapter(messageAdapter);
-        MemberData data = new MemberData(sharedPreferences.getString("myID", ""), sharedPreferences.getString("username", ""), user.getPhoto());
+        MemberData data = new MemberData(getIntent().getExtras().getString("myID"), sharedPreferences.getString("username", ""));
+        getMessageHistory();
         scaledrone = new Scaledrone(channelID, data);
         scaledrone.connect(new Listener() {
             @Override
@@ -65,21 +70,7 @@ public class MessageActivity extends AppCompatActivity {
                 scaledrone.subscribe(roomName, new RoomListener() {
                     @Override
                     public void onOpen(Room room) {
-                        room.listenToHistoryEvents((room1, receivedMessage) -> {
-                            Log.d("toz", receivedMessage.toString());
-                            ObjectMapper mapper = new ObjectMapper();
-                            try {
-                                final MemberData data = mapper.treeToValue(receivedMessage.getMember().getClientData(), MemberData.class);
-                                boolean belongsToCurrentUser = data.get_id().equals(sharedPreferences.getString("myID", ""));
-                                final Message message1 = new Message(receivedMessage.getData().asText(), belongsToCurrentUser);
-                                runOnUiThread(() -> {
-                                    messageAdapter.add(message1);
-                                    messagesView.setSelection(messagesView.getCount() - 1);
-                                });
-                            } catch (Exception e) {
 
-                            }
-                        });
                     }
 
                     @Override
@@ -89,13 +80,6 @@ public class MessageActivity extends AppCompatActivity {
 
                     @Override
                     public void onMessage(Room room, com.scaledrone.lib.Message message) {
-                        ObjectMapper mapper = new ObjectMapper();
-                        try {
-                            final MemberData data = mapper.treeToValue(message.getMember().getClientData(), MemberData.class);
-                            Log.d("tozmessage", data.toString());
-                        } catch (Exception e) {
-
-                        }
                         boolean belongsToCurrentUser = message.getClientID().equals(scaledrone.getClientID());
                         final Message message1 = new Message(message.getData().asText(), belongsToCurrentUser);
                         runOnUiThread(() -> {
@@ -103,7 +87,7 @@ public class MessageActivity extends AppCompatActivity {
                             messagesView.setSelection(messagesView.getCount() - 1);
                         });
                     }
-                }, new SubscribeOptions(50));
+                });
             }
 
             @Override
@@ -129,6 +113,7 @@ public class MessageActivity extends AppCompatActivity {
             scaledrone.publish(roomName, message);
             editText.getText().clear();
             sendNotification();
+            sendMessageToServer(message);
         }
     }
 
@@ -170,5 +155,51 @@ public class MessageActivity extends AppCompatActivity {
         user.setBirthdate(extras.getString("userBirth"));
         user.setPhoto(extras.getString("userPic"));
         user.setBio(extras.getString("userBio"));
+    }
+
+    private void getMessageHistory() {
+        ChatService chatService;
+        chatService = NetworkProvider.getClient().create(ChatService.class);
+        Call<List<MessageDTO>> listCall = chatService.getMessages(sharedPreferences.getString("token", ""), user.get_id());
+        listCall.enqueue(new Callback<List<MessageDTO>>() {
+            @Override
+            public void onResponse(Call<List<MessageDTO>> call, Response<List<MessageDTO>> response) {
+                if (response.isSuccessful()) {
+                    List<MessageDTO> list = response.body();
+                    for (MessageDTO messageDTO : list) {
+                        boolean belongsToCurrentUser = messageDTO.getUser1().equals(getIntent().getExtras().getString("myID"));
+                        final Message message1 = new Message(messageDTO.getMessage(), belongsToCurrentUser);
+                        runOnUiThread(() -> {
+                            messageAdapter.add(message1);
+                            messagesView.setSelection(messagesView.getCount() - 1);
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MessageDTO>> call, Throwable t) {
+                Toast.makeText(MessageActivity.this, "CA MARCHE AP", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void sendMessageToServer(String message) {
+        MessageDTO messageDTO = new MessageDTO(user.get_id(), message);
+        ChatService chatService;
+        chatService = NetworkProvider.getClient().create(ChatService.class);
+        Call<ResponseBody> responseBodyCall = chatService.insertMessage(sharedPreferences.getString("token", ""), messageDTO);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Toast.makeText(MessageActivity.this, "CA MARCHE ;)", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(MessageActivity.this, "CA MARCHE PAS", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
