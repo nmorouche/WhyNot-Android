@@ -29,6 +29,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -52,6 +53,8 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
     ImageView dislikeImage;
     @BindView(R.id.activity_home_empty_tv)
     TextView emptyTextView;
+    @BindView(R.id.activity_home_hobbies)
+    TextView hobbiesTextView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
@@ -61,6 +64,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
 
     private SharedPreferences sharedPreferences;
     private ArrayList<UserDTO> userDTOList;
+    private String[] mHobbies;
 
     private String TAG = "Home";
 
@@ -70,6 +74,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         sharedPreferences = SharedPref.getInstance(this);
+        mHobbies = sharedPreferences.getString("hobbies", "").split(", ");
         setupToolbar();
         hideButtons();
         getUsers();
@@ -111,6 +116,22 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
     }
 
     private void displayUser(UserDTO userDTO) {
+        String[] hobbies = userDTO.getHobbies();
+        String displayedHobbies = "";
+        for (int i = 0; i < mHobbies.length; i++) {
+            for (int j = 0; j < hobbies.length; j++) {
+                if (mHobbies[i].equals(hobbies[j])) {
+                    displayedHobbies += mHobbies[i];
+                }
+            }
+            if (i != mHobbies.length - 1) {
+                displayedHobbies += ", ";
+            }
+        }
+        if (displayedHobbies.length() == 0) {
+            displayedHobbies = "Aucun";
+        }
+        hobbiesTextView.setText("Hobbies en commun: \n" + displayedHobbies);
         textView.setText(String.format("%s  %s\n%s", userDTO.getUsername(),
                 getAge(userDTO.getBirthdate()), userDTO.getBio()));
         String url = userDTO.getPhoto();

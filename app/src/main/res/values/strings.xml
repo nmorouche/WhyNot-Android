@@ -30,4 +30,14 @@
     <string name="activity_my_profil_bio">Bio</string>
     <string name="activity_message_send_firebase_notification_title">Psssssst !</string>
     <string name="activity_message_send_firebase_notification_body">Tu as reçu un nouveau message</string>
+    <string name="signup3_hobby_button_title">Preferences</string>
+    <string name="activity_match_list_empty">Vous n\'avez pas encore de match</string>
+
+    <string-array name="preferences">
+        <item>Cinema</item>
+        <item>Sports</item>
+        <item>Video-Games</item>
+        <item>Serie</item>
+        <item>Manga</item>
+    </string-array>
 </resources>

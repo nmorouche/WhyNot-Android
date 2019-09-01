@@ -41,6 +41,8 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
     NavigationView navigationView;
     @BindView(R.id.match_rcv)
     RecyclerView recyclerView;
+    @BindView(R.id.activity_match_list_empty)
+    TextView emptyMatchList;
 
     private MatchAdapter matchAdapter;
     private SharedPreferences sharedPreferences;
@@ -51,6 +53,8 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
         setContentView(R.layout.activity_match_list);
         ButterKnife.bind(this);
         sharedPreferences = SharedPref.getInstance(this);
+        emptyMatchList.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
         setupToolbar();
         initRcv();
         loadData();
@@ -120,7 +124,11 @@ public class MatchListActivity extends MenuActivity implements NavigationView.On
             @Override
             public void onSuccess(List<User> data) {
                 if (data.size() > 0) {
+                    recyclerView.setVisibility(View.VISIBLE);
                     matchAdapter.setEventList(data);
+                } else {
+                    emptyMatchList.setText(getString(R.string.activity_match_list_empty));
+                    emptyMatchList.setVisibility(View.VISIBLE);
                 }
             }
 

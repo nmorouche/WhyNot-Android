@@ -2,6 +2,8 @@ package com.example.why_not_android.data.dto;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Arrays;
+
 public class SessionDTO {
     @SerializedName("email")
     private String email;
@@ -9,10 +11,20 @@ public class SessionDTO {
     private String username;
     @SerializedName("photo")
     private String photo;
+    @SerializedName("hobbies")
+    private String[] hobbies;
     @SerializedName("token")
     private String token;
     @SerializedName("error")
     private String error;
+
+    public String[] getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String[] hobbies) {
+        this.hobbies = hobbies;
+    }
 
     public String getEmail() {
         return email;
@@ -60,6 +72,7 @@ public class SessionDTO {
                 "email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", photo='" + photo + '\'' +
+                ", hobbies=" + Arrays.toString(hobbies) +
                 ", token='" + token + '\'' +
                 ", error='" + error + '\'' +
                 '}';

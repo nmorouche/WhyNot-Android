@@ -13,6 +13,7 @@ public class Signup {
     private Uri fileUri;
     private File imageFile;
     private String bio;
+    private String hobbies;
     private int preferences;
 
     private static Signup signup = null;
@@ -22,6 +23,14 @@ public class Signup {
             signup = new Signup();
         }
         return signup;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
     }
 
     public String getEmail() {

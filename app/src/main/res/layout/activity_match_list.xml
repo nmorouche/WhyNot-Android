@@ -37,6 +37,15 @@
             android:background="@color/colorPrimary"
             tools:context=".views.MatchListActivity">
 
+            <TextView
+                android:id="@+id/activity_match_list_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/redCharte"
+                android:gravity="center"
+                android:textColor="@color/blueCharte"
+                android:textSize="30sp" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/match_rcv"
                 android:layout_width="match_parent"

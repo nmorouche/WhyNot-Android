@@ -43,7 +43,7 @@
                 android:id="@+id/activity_home_iv"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,32 +56,45 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
-                android:lineSpacingExtra="20dp"
-                android:lines="2"
                 android:textColor="@color/blueCharte"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/activity_home_iv" />
+
+            <TextView
+                android:id="@+id/activity_home_hobbies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:lines="4"
+                android:gravity="center"
+                android:foregroundGravity="center"
+                android:lineSpacingExtra="20dp"
+                android:textColor="@color/blueCharte"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_home_user_description_tv" />
 
             <ImageView
                 android:id="@+id/activity_home_dislike_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/home_cancel"
                 app:layout_constraintEnd_toStartOf="@+id/activity_home_like_image"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_home_user_description_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_home_hobbies" />
 
             <ImageView
                 android:id="@+id/activity_home_like_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/home_like"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/activity_home_dislike_image"
-                app:layout_constraintTop_toBottomOf="@+id/activity_home_user_description_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_home_hobbies" />
 
             <TextView
                 android:id="@+id/activity_home_empty_tv"

@@ -2,6 +2,8 @@ package com.example.why_not_android.data.dto;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Arrays;
+
 public class UserDTO {
     @SerializedName("_id")
     private String _id;
@@ -21,12 +23,22 @@ public class UserDTO {
     private int preference;
     @SerializedName("bio")
     private String bio;
+    @SerializedName("hobbies")
+    private String[] hobbies;
     @SerializedName("createdAt")
     private String createdAt;
     @SerializedName("isDeleted")
     private String isDeleted;
     @SerializedName("banned")
     private String banned;
+
+    public String[] getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String[] hobbies) {
+        this.hobbies = hobbies;
+    }
 
     public String get_id() {
         return _id;
@@ -130,11 +142,13 @@ public class UserDTO {
                 "_id='" + _id + '\'' +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", photo='" + photo + '\'' +
                 ", birthdate='" + birthdate + '\'' +
-                ", gender='" + gender + '\'' +
-                ", preference='" + preference + '\'' +
+                ", gender=" + gender +
+                ", preference=" + preference +
                 ", bio='" + bio + '\'' +
+                ", hobbies=" + Arrays.toString(hobbies) +
                 ", createdAt='" + createdAt + '\'' +
                 ", isDeleted='" + isDeleted + '\'' +
                 ", banned='" + banned + '\'' +

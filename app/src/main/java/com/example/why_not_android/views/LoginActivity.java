@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -62,11 +64,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<SessionDTO> call, Response<SessionDTO> response) {
                 SessionDTO sessionDTO = response.body();
                 if (response.isSuccessful()) {
+                    String hobbies = "";
+                    String[] hobbiesDTO = sessionDTO.getHobbies();
+                    for (int i = 0; i < hobbiesDTO.length; i++) {
+                        hobbies += hobbiesDTO[i];
+                        if (i != hobbiesDTO.length - 1) {
+                            hobbies += ", ";
+                        }
+                    }
                     sharedPreferences.edit()
                             .putString("token", sessionDTO.getToken())
                             .putString("email", sessionDTO.getEmail())
                             .putString("username", sessionDTO.getUsername())
                             .putString("photo", sessionDTO.getPhoto())
+                            .putString("hobbies", hobbies)
                             .putString("password", password)
                             .apply();
                     Intent intent = new Intent(LoginActivity.this, Home.class);

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="@string/pr_ference"
@@ -65,6 +65,28 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:textColor="@color/blueCharte" />
+
+    <Button
+        android:id="@+id/signup3_hobby_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="100dp"
+        android:background="@drawable/button_shape_blue"
+        android:text="@string/signup3_hobby_button_title"
+        android:textColor="@color/redCharte" />
+
+    <TextView
+        android:id="@+id/signup3_selected_hobbies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:textColor="@color/redCharte"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/signup2Button"

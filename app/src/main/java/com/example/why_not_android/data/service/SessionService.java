@@ -24,6 +24,7 @@ public interface SessionService {
             @Part("gender") RequestBody gender,
             @Part("birthdate") RequestBody birthdate,
             @Part("bio") RequestBody bio,
+            @Part("hobbies") RequestBody hobbies,
             @Part("preference") RequestBody preference,
             @Part MultipartBody.Part file
     );
