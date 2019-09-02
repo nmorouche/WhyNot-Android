@@ -29,7 +29,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -167,7 +166,6 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
 
             @Override
             public void onFailure(Call<ArrayList<UserDTO>> call, Throwable t) {
-                Log.d("toz", "CA MARCHE PAS CA MARCHE PAS QUAND JE CLIQUE SUR LE LIEN CA MARCHE PAS");
             }
         });
 
@@ -189,7 +187,6 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
 
             @Override
             public void onFailure(Call<RegisterResultDTO> call, Throwable t) {
-                Toast.makeText(Home.this, "CA MARCHE PAS :(", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -214,13 +211,11 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                         matchDialog.showDialog(Home.this, mUsername, mImageURL);
                     }
                 } else {
-                    Log.d("CA MARCHE", "CA MARCHE PAS :(");
                 }
             }
 
             @Override
             public void onFailure(Call<MatchDTO> call, Throwable t) {
-                Log.d("CA MARCHE", "CA FAIL :(");
             }
         });
     }
@@ -302,7 +297,7 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                 .setPositiveButton("Oui", (dialog, which) -> finish())
                 .setNegativeButton("Déconnexion et quitter", ((dialog, which) -> {
                     sharedPreferences.edit().clear().apply();
-                    finishAffinity();
+                    finish();
                     System.exit(0);
                 }))
                 .setNeutralButton("Annuler", null)

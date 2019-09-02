@@ -179,7 +179,6 @@ public class MessageActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<MessageDTO>> call, Throwable t) {
-                Toast.makeText(MessageActivity.this, "CA MARCHE AP", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -192,12 +191,10 @@ public class MessageActivity extends AppCompatActivity {
         responseBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Toast.makeText(MessageActivity.this, "CA MARCHE ;)", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(MessageActivity.this, "CA MARCHE PAS", Toast.LENGTH_SHORT).show();
             }
         });
 

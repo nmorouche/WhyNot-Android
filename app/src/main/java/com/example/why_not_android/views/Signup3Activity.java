@@ -164,7 +164,6 @@ public class Signup3Activity extends AppCompatActivity {
             @Override
             public void onFailure(Call<SessionDTO> call, Throwable t) {
                 Log.d("toz", t.toString());
-                Toast.makeText(Signup3Activity.this, "CA MARCHE PAS", Toast.LENGTH_SHORT).show();
             }
         });
     }

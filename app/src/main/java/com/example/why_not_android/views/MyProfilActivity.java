@@ -279,7 +279,6 @@ public class MyProfilActivity extends MenuActivity implements NavigationView.OnN
 
             @Override
             public void onFailure(Call<SessionDTO> call, Throwable t) {
-                Toast.makeText(MyProfilActivity.this, "CA MARCHE PAS :(", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -326,7 +325,6 @@ public class MyProfilActivity extends MenuActivity implements NavigationView.OnN
         if (isInformationsCorrect()) {
             updateAccount();
         } else {
-            Toast.makeText(this, "TOZ CA MARCHE PAS", Toast.LENGTH_SHORT).show();
         }
     }
 }
