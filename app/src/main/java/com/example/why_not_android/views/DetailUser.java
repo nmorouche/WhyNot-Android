@@ -46,7 +46,6 @@ public class DetailUser extends AppCompatActivity {
         String birth = extras.getString("userBirth");
         String image = extras.getString("userPic");
         id = extras.getString("userid");
-        Log.d("toz", id);
         biotv.setText(bio);
         birthdatetv.setText(birth);
         nametv.setText(String.format("%s %s", name, getAge(birth)));

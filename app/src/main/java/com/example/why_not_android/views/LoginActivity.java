@@ -88,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject errorJSON = new JSONObject(response.errorBody().string());
                         Toast.makeText(LoginActivity.this, errorJSON.getString("error"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Log.d("toz", e.toString());
                         e.printStackTrace();
                     }
                 }
@@ -96,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SessionDTO> call, Throwable t) {
-                Log.d("toz", t.toString());
                 t.printStackTrace();
             }
         });

@@ -92,14 +92,12 @@ public class DetailEvent extends AppCompatActivity {
                                 JSONObject errorJSON = new JSONObject(response.errorBody().string());
                                 Toast.makeText(DetailEvent.this, errorJSON.getString("error"), Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
-                                Log.d("toz", e.toString());
                             }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<RegisterDTO> call, Throwable t) {
-                        Log.d("toz", t.toString());
                     }
                 });
                 return true;

@@ -43,7 +43,7 @@ public class NetworkProvider {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(localBaseUrl)
+                    .baseUrl(prodBaseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -51,7 +51,7 @@ public class NetworkProvider {
     }
 
     private NetworkProvider() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(localBaseUrl)
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(prodBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         eventService = retrofit.create(EventService.class);
@@ -74,7 +74,6 @@ public class NetworkProvider {
             @Override
             public void onFailure(Call<EventsDTO> call, Throwable t) {
                 listener.onError(t);
-                Log.d("toz", "fail");
             }
         });
     }
@@ -97,7 +96,6 @@ public class NetworkProvider {
             @Override
             public void onFailure(Call<EventsDTO> call, Throwable t) {
                 listener.onError(t);
-                Log.d("toz", "fail");
             }
         });
     }
@@ -117,7 +115,6 @@ public class NetworkProvider {
             @Override
             public void onFailure(Call<List<UserDTO>> call, Throwable t) {
                 listener.onError(t);
-                Log.d("toz", "fail");
             }
         });
     }

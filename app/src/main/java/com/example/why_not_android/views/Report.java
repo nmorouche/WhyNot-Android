@@ -50,7 +50,7 @@ public class Report extends AppCompatActivity {
         sharedPreferences = SharedPref.getInstance(this);
         ButterKnife.bind(this);
         Bundle extras = getIntent().getExtras();
-         id = extras.getString("userid");
+        id = extras.getString("userid");
         genderGr.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.radioButtonFake) {
                 type = "Fake";
@@ -63,21 +63,17 @@ public class Report extends AppCompatActivity {
     }
 
     @OnClick(R.id.activity_report_btn)
-    void report(){
-
-        Log.d("wesh",type +" "+ id +"  "+descTv.getText());
-
+    void report() {
         ReportService reportService;
         reportService = NetworkProvider.getClient().create(ReportService.class);
-        ReportDTO reportDTO = new ReportDTO(type, descTv.getText().toString(),id);
+        ReportDTO reportDTO = new ReportDTO(type, descTv.getText().toString(), id);
 
-        Call<ReportDTO> reportDTOCall = reportService.report(SharedPref.getToken(),reportDTO);
+        Call<ReportDTO> reportDTOCall = reportService.report(SharedPref.getToken(), reportDTO);
         reportDTOCall.enqueue(new Callback<ReportDTO>() {
             @Override
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
                 ReportDTO reportDTO = response.body();
                 if (response.isSuccessful()) {
-                    Log.d("tt","tt");
                     Intent intent = new Intent(Report.this, Home.class);
                     startActivity(intent);
                 }

@@ -155,7 +155,6 @@ public class Signup3Activity extends AppCompatActivity {
                         JSONObject errorJSON = new JSONObject(response.errorBody().string());
                         Toast.makeText(Signup3Activity.this, errorJSON.getString("error"), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Log.d("toz", e.toString());
                     }
                 }
 
@@ -163,7 +162,6 @@ public class Signup3Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SessionDTO> call, Throwable t) {
-                Log.d("toz", t.toString());
             }
         });
     }

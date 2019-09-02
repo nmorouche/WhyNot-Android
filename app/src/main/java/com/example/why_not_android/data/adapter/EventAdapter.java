@@ -42,7 +42,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public void onBindViewHolder(@NonNull EventViewHolder eventViewHolder, int i) {
 
         Event event = eventList.get(i);
-        Log.d("bind", event.getName());
         eventViewHolder.nameTv.setText(event.getName());
         eventViewHolder.dateTv.setText(event.getDate());
         Glide.with(eventViewHolder.itemView).load(event.getImageURL().replace("localhost", "10.0.2.2")).into(eventViewHolder.pictureImv);

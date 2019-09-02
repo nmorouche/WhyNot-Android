@@ -54,7 +54,6 @@ public class EventList extends MenuActivity implements NavigationView.OnNavigati
     }
 
     private void initRcv() {
-        Log.d("init", "init");
         eventRcv.setLayoutManager(new LinearLayoutManager(this));
         eventAdapter = new EventAdapter();
         eventRcv.setAdapter(eventAdapter);

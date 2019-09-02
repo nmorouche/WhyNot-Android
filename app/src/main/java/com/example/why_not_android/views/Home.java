@@ -87,7 +87,6 @@ public class Home extends MenuActivity implements NavigationView.OnNavigationIte
                     // Get new Instance ID token
                     String token = task.getResult().getToken();
                     registrateFirebaseTokenToDatabase(token);
-                    Log.d(TAG, token);
                 });
     }
 
